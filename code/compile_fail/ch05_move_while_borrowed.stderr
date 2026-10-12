@@ -1,0 +1,12 @@
+error[E0505]: cannot move out of `line` because it is borrowed
+  --> compile_fail/ch05_move_while_borrowed.rs:10:16
+   |
+ 7 |     let line = String::from("timeout=30");
+   |         ---- binding `line` declared here
+ 8 |     let key = line.split('=').next().unwrap_or("");
+   |               ---- borrow of `line` occurs here
+ 9 |     let mut lines = Vec::new();
+10 |     lines.push(line); // moves `line` into the vector
+   |                ^^^^ move out of `line` occurs here
+11 |     println!("key: {key}");
+   |                     --- borrow later used here

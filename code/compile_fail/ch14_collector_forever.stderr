@@ -1,0 +1,11 @@
+error[E0502]: cannot borrow `words` as immutable because it is also borrowed as mutable
+  --> compile_fail/ch14_collector_forever.rs:26:5
+   |
+21 |         let mut collector = Collector { out: &mut words };
+   |                                              ---------- mutable borrow occurs here
+...
+26 |     words.len()
+   |     ^^^^^
+   |     |
+   |     immutable borrow occurs here
+   |     mutable borrow later used here

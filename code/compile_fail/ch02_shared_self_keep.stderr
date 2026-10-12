@@ -1,0 +1,9 @@
+error[E0502]: cannot borrow `parser` as mutable because it is also borrowed as immutable
+  --> compile_fail/ch02_shared_self_keep.rs:28:5
+   |
+27 |     let before = parser.rest();
+   |                  ------ immutable borrow occurs here
+28 |     parser.advance(10);
+   |     ^^^^^^^^^^^^^^^^^^ mutable borrow occurs here
+29 |     println!("{before}"); // `before` keeps the shared borrow of `parser` live
+   |                ------ immutable borrow later used here

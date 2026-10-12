@@ -1,0 +1,13 @@
+# The companion code of *Rust Lifetimes*. The runnable programs are single-file
+# examples (examples/chNN_*.rs); the programs that must be rejected live in
+# compile_fail/ and are compiled on their own by tools/run_examples.py.
+# Everything uses the standard library only.
+[package]
+name = "book-examples"
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[workspace]
+resolver = "3"

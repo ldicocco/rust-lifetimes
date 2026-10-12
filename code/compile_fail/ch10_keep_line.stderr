@@ -1,0 +1,7 @@
+error[E0499]: cannot borrow `lines` as mutable more than once at a time
+  --> compile_fail/ch10_keep_line.rs:35:28
+   |
+35 |     while let Some(line) = lines.next() {
+   |                            ^^^^^ `lines` was mutably borrowed here in the previous iteration of the loop
+36 |         keys.push(line); // keeps a borrow of `lines.buffer`
+   |         ---- first borrow used here, in later iteration of loop

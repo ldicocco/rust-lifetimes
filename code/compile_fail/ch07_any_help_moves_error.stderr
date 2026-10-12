@@ -1,0 +1,13 @@
+error[E0597]: `source` does not live long enough
+  --> compile_fail/ch07_any_help_moves_error.rs:19:39
+   |
+18 |     let source = String::from("let x = 1;");
+   |         ------ binding `source` declared here
+19 |     let erased = erase(Token { text: &source[..3] });
+   |                  ---------------------^^^^^^--------
+   |                  |                    |
+   |                  |                    borrowed value does not live long enough
+   |                  argument requires that `source` is borrowed for `'static`
+20 |     println!("{}", erased.is::<Token<'static>>());
+21 | }
+   | - `source` dropped here while still borrowed

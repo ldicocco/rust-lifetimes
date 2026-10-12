@@ -1,0 +1,13 @@
+shrink_ref:       literal
+shrink_inner:     inner
+shrink_vec:       ["a", "b"]
+shrink_loan:      slot
+shrink_box:       boxed
+shrink_option:    Some("some")
+shrink_rc:        shared
+shrink_arc:       atomic
+shrink_const_ptr: false
+shrink_fn_result: hello
+shrink_dyn_bound: 42
+grow_fn_arg:      4
+shrink_twice:     a literal

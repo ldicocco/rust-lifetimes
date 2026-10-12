@@ -1,0 +1,14 @@
+error[E0261]: use of undeclared lifetime name `'src`
+  --> compile_fail/ch06_impl_header_name.rs:12:28
+   |
+12 |     pub fn rest(&self) -> &'src str {
+   |                            ^^^^ undeclared lifetime
+   |
+help: consider introducing lifetime `'src` here
+   |
+12 |     pub fn rest<'src>(&self) -> &'src str {
+   |                ++++++
+help: consider introducing lifetime `'src` here
+   |
+11 | impl<'src> Parser<'_> {
+   |     ++++++

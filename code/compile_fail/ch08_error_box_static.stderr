@@ -1,0 +1,12 @@
+error: lifetime may not live long enough
+  --> compile_fail/ch08_error_box_static.rs:23:21
+   |
+22 | pub fn parse_port(s: &str) -> Result<u16, Box<dyn Error>> {
+   |                      - let's call the lifetime of this reference `'1`
+23 |     let port: u16 = s.trim().parse().map_err(|_| BadNumber { input: s })?;
+   |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ returning this value requires that `'1` must outlive `'static`
+   |
+help: to declare that the trait object captures data from argument `s`, you can add an explicit `'_` lifetime bound
+   |
+22 | pub fn parse_port(s: &str) -> Result<u16, Box<dyn Error + '_>> {
+   |                                                         ++++

@@ -1,0 +1,4 @@
+ferris
+["red", "green", "teal"]
+static
+teal

@@ -1,0 +1,5 @@
+literal:  a literal
+static:   lifetimes and ""
+const:    [1, 2, 3]
+promoted: 42 and ["fn", "let", "match"]
+leaked:   worker-7

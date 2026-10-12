@@ -1,0 +1,17 @@
+error: lifetime may not live long enough
+ --> compile_fail/ch09_closure_return.rs:8:32
+  |
+8 |     let first_word = |s: &str| s.split(' ').next().unwrap_or("");
+  |                          -   - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ returning this value requires that `'1` must outlive `'2`
+  |                          |   |
+  |                          |   return type of closure is &'2 str
+  |                          let's call the lifetime of this reference `'1`
+
+error: lifetime may not live long enough
+ --> compile_fail/ch09_closure_return.rs:9:41
+  |
+9 |     let annotated = |s: &str| -> &str { s.split(' ').next().unwrap_or("") };
+  |                         -        -      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ returning this value requires that `'1` must outlive `'2`
+  |                         |        |
+  |                         |        let's call the lifetime of this reference `'2`
+  |                         let's call the lifetime of this reference `'1`

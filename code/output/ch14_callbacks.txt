@@ -1,0 +1,3 @@
+total length: 40
+kept: ["INFO start", "WARN disk almost full", "INFO stop"]
+3 lines, warnings: ["WARN disk almost full"]

@@ -1,0 +1,22 @@
+error[E0515]: cannot return value referencing function parameter `text`
+  --> compile_fail/ch13_self_ref_new.rs:14:9
+   |
+13 |         let title = text.lines().next().unwrap_or("");
+   |                     ---- `text` is borrowed here
+14 |         Document { text, title }
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^ returns a value referencing data owned by the current function
+
+error[E0505]: cannot move out of `text` because it is borrowed
+  --> compile_fail/ch13_self_ref_new.rs:14:20
+   |
+11 | impl<'a> Document<'a> {
+   |      -- lifetime `'a` defined here
+12 |     pub fn new(text: String) -> Document<'a> {
+   |                ---- binding `text` declared here
+13 |         let title = text.lines().next().unwrap_or("");
+   |                     ---- borrow of `text` occurs here
+14 |         Document { text, title }
+   |         -----------^^^^---------
+   |         |          |
+   |         |          move out of `text` occurs here
+   |         returning this value requires that `text` is borrowed for `'a`

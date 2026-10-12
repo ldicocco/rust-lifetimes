@@ -1,0 +1,21 @@
+error[E0597]: `prefix` does not live long enough
+  --> compile_fail/ch08_overcapture.rs:18:37
+   |
+17 |         let prefix = String::from("> ");
+   |             ------ binding `prefix` declared here
+18 |         chars = after_prefix(&text, &prefix);
+   |                                     ^^^^^^^ borrowed value does not live long enough
+19 |     } // `prefix` is dropped here
+   |     - `prefix` dropped here while still borrowed
+20 |     chars.collect()
+   |     ----- borrow later used here
+   |
+note: this call may capture more lifetimes than intended, because Rust 2024 has adjusted the `impl Trait` lifetime capture rules
+  --> compile_fail/ch08_overcapture.rs:18:17
+   |
+18 |         chars = after_prefix(&text, &prefix);
+   |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: use the precise capturing `use<...>` syntax to make the captures explicit
+   |
+ 7 | pub fn after_prefix<'s>(s: &'s str, prefix: &str) -> impl Iterator<Item = char> + use<> {
+   |                                                                                 +++++++

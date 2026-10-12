@@ -1,0 +1,9 @@
+call 1
+  inside requires_static
+  drop first
+call 2
+  inside requires_static
+call 3
+  inside requires_static
+  inside requires_static
+done

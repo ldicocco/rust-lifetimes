@@ -1,0 +1,13 @@
+locals and fields:
+  drop ignored
+  end of block (pair.first and pair.second)
+  drop pair.first
+  drop pair.second
+  drop b
+  drop a
+a report declared after its text:
+  report: 2 lines, first "first line"
+a plain Vec<&str> declared before its text:
+  2 lines
+a struct without Drop declared before its text:
+  2 lines

@@ -1,0 +1,12 @@
+error[E0597]: `prefix` does not live long enough
+  --> compile_fail/ch07_static_param.rs:14:18
+   |
+13 |     let prefix = format!("worker-{id}");
+   |         ------ binding `prefix` declared here
+14 |     start_logger(&prefix).join().unwrap();
+   |     -------------^^^^^^^-
+   |     |            |
+   |     |            borrowed value does not live long enough
+   |     argument requires that `prefix` is borrowed for `'static`
+15 | }
+   | - `prefix` dropped here while still borrowed

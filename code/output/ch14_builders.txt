@@ -1,0 +1,3 @@
+https://example.com/items [("accept", "text/plain")] 500ms
+SELECT * FROM users WHERE age > 30
+SELECT * FROM users WHERE age > 30 AND active

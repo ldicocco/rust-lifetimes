@@ -1,0 +1,9 @@
+error[E0502]: cannot borrow `*summary` as mutable because it is also borrowed as immutable
+  --> compile_fail/ch12_oncecell_take.rs:11:5
+   |
+10 |     let current = summary.get_or_init(|| String::from("draft"));
+   |                   ------- immutable borrow occurs here
+11 |     summary.take(); // would free the `String` that `current` points to
+   |     ^^^^^^^^^^^^^^ mutable borrow occurs here
+12 |     println!("{current}");
+   |                ------- immutable borrow later used here

@@ -1,0 +1,14 @@
+error[E0382]: use of moved value: `words`
+  --> compile_fail/ch05_generic_moves.rs:12:17
+   |
+10 | pub fn generic_call(words: &mut Vec<String>) {
+   |                     ----- move occurs because `words` has type `&mut Vec<String>`, which does not implement the `Copy` trait
+11 |     passthrough(words).push(String::from("zeta"));
+   |                 ----- value moved here
+12 |     passthrough(words).push(String::from("eta"));
+   |                 ^^^^^ value used here after move
+   |
+help: consider creating a fresh reborrow of `words` here
+   |
+11 |     passthrough(&mut *words).push(String::from("zeta"));
+   |                 ++++++

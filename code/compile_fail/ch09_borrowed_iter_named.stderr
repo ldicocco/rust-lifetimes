@@ -1,0 +1,33 @@
+error[E0597]: `c` does not live long enough
+  --> compile_fail/ch09_borrowed_iter_named.rs:10:15
+   |
+ 6 | pub fn stats<'x, C: 'x>(c: C) -> (i32, usize)
+   |              --         - binding `c` declared here
+   |              |
+   |              lifetime `'x` defined here
+...
+10 |     let sum = (&c).into_iter().sum();
+   |               ^^^^------------
+   |               |
+   |               borrowed value does not live long enough
+   |               argument requires that `c` is borrowed for `'x`
+...
+13 | }
+   | - `c` dropped here while still borrowed
+
+error[E0597]: `c` does not live long enough
+  --> compile_fail/ch09_borrowed_iter_named.rs:11:17
+   |
+ 6 | pub fn stats<'x, C: 'x>(c: C) -> (i32, usize)
+   |              --         - binding `c` declared here
+   |              |
+   |              lifetime `'x` defined here
+...
+11 |     let count = (&c).into_iter().count();
+   |                 ^^^^------------
+   |                 |
+   |                 borrowed value does not live long enough
+   |                 argument requires that `c` is borrowed for `'x`
+12 |     (sum, count)
+13 | }
+   |  - `c` dropped here while still borrowed

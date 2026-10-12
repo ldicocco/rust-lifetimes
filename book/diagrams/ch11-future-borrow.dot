@@ -1,0 +1,41 @@
+// How long the borrow of `key` lasts: until the call returns for a plain
+// function, until the future completes for an async fn (code/examples/ch11_async_captures.rs).
+digraph G {
+  graph [bgcolor="white", fontname="Helvetica", fontsize=11, pad=0.2, nodesep=0.35, ranksep=0.45];
+  node  [shape=plaintext, fontname="Helvetica", fontsize=11];
+
+  timeline [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#475569">
+      <TR>
+        <TD ALIGN="LEFT"><B>step</B></TD>
+        <TD><B>borrow of key:<BR/>lookup (plain fn)</B></TD>
+        <TD><B>borrow of key:<BR/>lookup_async</B></TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT" BGCOLOR="#ffedd5">call with &amp;key</TD>
+        <TD BGCOLOR="#dbeafe">created, used by the body</TD>
+        <TD BGCOLOR="#dbeafe">created, stored in the future</TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT" BGCOLOR="#ffedd5">call returns</TD>
+        <TD BGCOLOR="#dcfce7">ended: key is free</TD>
+        <TD BGCOLOR="#dbeafe">held (body not run yet)</TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT" BGCOLOR="#ffedd5">other statements</TD>
+        <TD></TD>
+        <TD BGCOLOR="#dbeafe">held</TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT" BGCOLOR="#ffedd5">future polled</TD>
+        <TD></TD>
+        <TD BGCOLOR="#dbeafe">used by the body</TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT" BGCOLOR="#ffedd5">future completes</TD>
+        <TD></TD>
+        <TD BGCOLOR="#dcfce7">ended: key is free</TD>
+      </TR>
+    </TABLE>
+  >];
+}

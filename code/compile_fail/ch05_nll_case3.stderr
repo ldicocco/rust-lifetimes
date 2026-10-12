@@ -1,0 +1,12 @@
+error[E0502]: cannot borrow `*cache` as mutable because it is also borrowed as immutable
+  --> compile_fail/ch05_nll_case3.rs:13:5
+   |
+ 9 | pub fn cached<'m>(cache: &'m mut HashMap<String, String>, word: &str) -> &'m String {
+   |               -- lifetime `'m` defined here
+10 |     if let Some(found) = cache.get(word) {
+   |                          ----- immutable borrow occurs here
+11 |         return found;
+   |                ----- returning this value requires that `*cache` is borrowed for `'m`
+12 |     }
+13 |     cache.insert(word.to_owned(), word.to_uppercase());
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ mutable borrow occurs here

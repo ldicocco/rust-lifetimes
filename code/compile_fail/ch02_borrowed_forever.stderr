@@ -1,0 +1,10 @@
+error[E0499]: cannot borrow `parser` as mutable more than once at a time
+  --> compile_fail/ch02_borrowed_forever.rs:38:5
+   |
+37 |     parser.next_word(); // the result is thrown away...
+   |     ------ first mutable borrow occurs here
+38 |     parser.next_word(); // ...and the parser is still borrowed
+   |     ^^^^^^
+   |     |
+   |     second mutable borrow occurs here
+   |     first borrow later used here

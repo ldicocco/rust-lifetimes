@@ -1,0 +1,5 @@
+error[E0637]: `'_` cannot be used here
+  --> compile_fail/ch10_item_anonymous.rs:13:18
+   |
+13 |     type Item = &'_ mut [T];
+   |                  ^^ `'_` is a reserved lifetime name

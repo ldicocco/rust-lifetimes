@@ -1,0 +1,4 @@
+request id: Some(42)
+user name:  Some("ada")
+literal:    Some("a literal")
+String:     None

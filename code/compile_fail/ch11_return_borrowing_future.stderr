@@ -1,0 +1,12 @@
+error[E0597]: `text` does not live long enough
+  --> compile_fail/ch11_return_borrowing_future.rs:13:17
+   |
+12 |     let text = String::from("listen port 8080");
+   |         ---- binding `text` declared here
+13 |     count_words(&text)
+   |     ------------^^^^^-
+   |     |           |
+   |     |           borrowed value does not live long enough
+   |     argument requires that `text` is borrowed for `'static`
+14 | }
+   | - `text` dropped here while still borrowed

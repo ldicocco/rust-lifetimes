@@ -1,0 +1,28 @@
+error[E0316]: nested quantification of lifetimes
+  --> compile_fail/ch09_binder_limits.rs:16:16
+   |
+16 |     for<'a> F: for<'b> Fn(&'a str, &'b str),
+   |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0658]: `for<...>` binders for closures are experimental
+  --> compile_fail/ch09_binder_limits.rs:31:15
+   |
+31 |     let len = for<'a> |s: &'a str| -> usize { s.len() };
+   |               ^^^^^^^
+   |
+   = note: see issue #97362 <https://github.com/rust-lang/rust/issues/97362> for more information
+   = help: consider removing `for<...>`
+
+error[E0658]: only lifetime parameters can be used in this context
+  --> compile_fail/ch09_binder_limits.rs:24:12
+   |
+24 |     F: for<T> Fn(T),
+   |            ^
+   |
+   = note: see issue #108185 <https://github.com/rust-lang/rust/issues/108185> for more information
+
+error[E0582]: binding for associated type `Output` references lifetime `'a`, which does not appear in the trait input types
+ --> compile_fail/ch09_binder_limits.rs:8:24
+  |
+8 |     F: for<'a> Fn() -> &'a str,
+  |                        ^^^^^^^

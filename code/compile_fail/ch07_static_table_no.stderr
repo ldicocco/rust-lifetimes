@@ -1,0 +1,58 @@
+error[E0597]: `text` does not live long enough
+  --> compile_fail/ch07_static_table_no.rs:13:16
+   |
+12 |     let text = String::from("local text");
+   |         ---- binding `text` declared here
+13 |     is_static(&text.as_str()); // `&'a str` with a local `'a`
+   |     -----------^^^^----------
+   |     |          |
+   |     |          borrowed value does not live long enough
+   |     argument requires that `text` is borrowed for `'static`
+...
+16 | }
+   | - `text` dropped here while still borrowed
+   |
+note: requirement that the value outlives `'static` introduced here
+  --> compile_fail/ch07_static_table_no.rs:8:17
+   |
+ 8 | fn is_static<T: 'static>(_: &T) {}
+   |                 ^^^^^^^
+
+error[E0597]: `text` does not live long enough
+  --> compile_fail/ch07_static_table_no.rs:14:21
+   |
+12 |     let text = String::from("local text");
+   |         ---- binding `text` declared here
+13 |     is_static(&text.as_str()); // `&'a str` with a local `'a`
+14 |     is_static(&Line(&text)); // `Line<'a>` with a local `'a`
+   |     ----------------^^^^^--
+   |     |               |
+   |     |               borrowed value does not live long enough
+   |     argument requires that `text` is borrowed for `'static`
+15 |     is_static(&|| text.len()); // a closure that borrows `text`
+16 | }
+   | - `text` dropped here while still borrowed
+   |
+note: requirement that the value outlives `'static` introduced here
+  --> compile_fail/ch07_static_table_no.rs:8:17
+   |
+ 8 | fn is_static<T: 'static>(_: &T) {}
+   |                 ^^^^^^^
+
+error[E0373]: closure may outlive the current function, but it borrows `text`, which is owned by the current function
+  --> compile_fail/ch07_static_table_no.rs:15:16
+   |
+15 |     is_static(&|| text.len()); // a closure that borrows `text`
+   |                ^^ ---- `text` is borrowed here
+   |                |
+   |                may outlive borrowed value `text`
+   |
+note: function requires argument type to outlive `'static`
+  --> compile_fail/ch07_static_table_no.rs:15:5
+   |
+15 |     is_static(&|| text.len()); // a closure that borrows `text`
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+help: to force the closure to take ownership of `text` (and any other referenced variables), use the `move` keyword
+   |
+15 |     is_static(&move || text.len()); // a closure that borrows `text`
+   |                ++++

@@ -1,0 +1,4 @@
+last: edit
+all: ["open", "edit", "save"]
+shouting: Some("SAVE")
+owned: Some("save"), left: 0

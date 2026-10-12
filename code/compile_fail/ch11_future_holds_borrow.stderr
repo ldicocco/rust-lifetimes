@@ -1,0 +1,9 @@
+error[E0502]: cannot borrow `text` as mutable because it is also borrowed as immutable
+  --> compile_fail/ch11_future_holds_borrow.rs:27:5
+   |
+26 |     let future = count_words(&text);
+   |                              ----- immutable borrow occurs here
+27 |     text.push_str(" log-level debug");
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ mutable borrow occurs here
+28 |     block_on(future)
+   |              ------ immutable borrow later used here

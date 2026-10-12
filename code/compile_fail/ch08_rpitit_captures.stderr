@@ -1,0 +1,9 @@
+error[E0502]: cannot borrow `*inventory` as mutable because it is also borrowed as immutable
+  --> compile_fail/ch08_rpitit_captures.rs:12:5
+   |
+11 |     let before = inventory.ids();
+   |                  --------- immutable borrow occurs here
+12 |     add(inventory);
+   |     ^^^^^^^^^^^^^^ mutable borrow occurs here
+13 |     before.sum()
+   |     ------ immutable borrow later used here

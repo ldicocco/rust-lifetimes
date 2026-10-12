@@ -1,0 +1,17 @@
+error: implementation of `Fn` is not general enough
+  --> compile_fail/ch09_early_bound.rs:21:25
+   |
+21 |     apply(first_late) + apply(first_early)
+   |                         ^^^^^^^^^^^^^^^^^^ implementation of `Fn` is not general enough
+   |
+   = note: `fn(&'2 [i32]) -> &'2 i32 {first_early::<'2, i32>}` must implement `Fn<(&'1 [i32],)>`, for any lifetime `'1`...
+   = note: ...but it actually implements `Fn<(&'2 [i32],)>`, for some specific lifetime `'2`
+
+error: implementation of `FnOnce` is not general enough
+  --> compile_fail/ch09_early_bound.rs:21:25
+   |
+21 |     apply(first_late) + apply(first_early)
+   |                         ^^^^^^^^^^^^^^^^^^ implementation of `FnOnce` is not general enough
+   |
+   = note: `fn(&'2 [i32]) -> &'2 i32 {first_early::<'2, i32>}` must implement `FnOnce<(&'1 [i32],)>`, for any lifetime `'1`...
+   = note: ...but it actually implements `FnOnce<(&'2 [i32],)>`, for some specific lifetime `'2`

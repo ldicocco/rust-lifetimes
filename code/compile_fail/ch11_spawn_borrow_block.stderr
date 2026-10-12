@@ -1,0 +1,13 @@
+error[E0373]: async block may outlive the current function, but it borrows `config`, which is owned by the current function
+  --> compile_fail/ch11_spawn_borrow_block.rs:31:20
+   |
+31 |     executor.spawn(async {
+   |                    ^^^^^ may outlive borrowed value `config`
+32 |         println!("{} words", count_words(&config).await);
+   |                                           ------ `config` is borrowed here
+   |
+   = note: async blocks are not executed immediately and must either take a reference or ownership of outside variables they use
+help: to force the async block to take ownership of `config` (and any other referenced variables), use the `move` keyword
+   |
+31 |     executor.spawn(async move {
+   |                          ++++

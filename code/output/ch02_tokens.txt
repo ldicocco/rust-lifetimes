@@ -1,0 +1,3 @@
+key "port", equals, number 8080
+bad word "???" at position 2
+Equals

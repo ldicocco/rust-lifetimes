@@ -1,0 +1,14 @@
+error[E0308]: mismatched types
+  --> compile_fail/ch09_async_fut_param.rs:34:5
+   |
+34 |     with_local(count_words)
+   |     ^^^^^^^^^^^^^^^^^^^^^^^ one type is more general than the other
+   |
+   = note: expected opaque type `impl for<'a> Future<Output = usize>`
+              found opaque type `impl Future<Output = usize>`
+   = note: distinct uses of `impl Trait` result in different opaque types
+note: the lifetime requirement is introduced here
+  --> compile_fail/ch09_async_fut_param.rs:22:20
+   |
+22 |     F: Fn(&str) -> Fut,
+   |                    ^^^

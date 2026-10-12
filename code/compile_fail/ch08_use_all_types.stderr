@@ -1,0 +1,9 @@
+error: `impl Trait` must mention all type parameters in scope in `use<...>`
+ --> compile_fail/ch08_use_all_types.rs:8:50
+  |
+8 | pub fn tagged<T: Display>(tag: T, text: &str) -> impl Display + use<'_> {
+  |               -                                  ^^^^^^^^^^^^^^^^^^^^^^
+  |               |
+  |               type parameter is implicitly captured by this `impl Trait`
+  |
+  = note: currently, all type parameters are required to be mentioned in the precise captures list

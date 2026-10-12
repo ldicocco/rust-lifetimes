@@ -1,0 +1,22 @@
+error[E0597]: `text` does not live long enough
+  --> compile_fail/ch05_tail_expr_2021.rs:32:17
+   |
+31 |     let text = String::from("one two three");
+   |         ---- binding `text` declared here
+32 |     Reader::new(&text).word_count()
+   |     ------------^^^^^-
+   |     |           |
+   |     |           borrowed value does not live long enough
+   |     a temporary with access to the borrow is created here ...
+33 | }
+   | -
+   | |
+   | `text` dropped here while still borrowed
+   | ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `Reader`
+   |
+   = note: the temporary is part of an expression at the end of a block;
+           consider forcing this temporary to be dropped sooner, before the block's local variables are dropped
+help: for example, you could save the expression's value in a new local variable `x` and then make `x` be the expression at the end of the block
+   |
+32 |     let x = Reader::new(&text).word_count(); x
+   |     +++++++                                +++

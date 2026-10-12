@@ -1,0 +1,11 @@
+error: lifetime may not live long enough
+  --> compile_fail/ch10_iterator_windows.rs:20:9
+   |
+12 | impl<'s, T> Iterator for WindowsMut<'s, T> {
+   |      -- lifetime `'s` defined here
+...
+15 |     fn next(&mut self) -> Option<Self::Item> {
+   |             - let's call the lifetime of this reference `'1`
+...
+20 |         Some(window)
+   |         ^^^^^^^^^^^^ method was supposed to return data with lifetime `'s` but it is returning data with lifetime `'1`

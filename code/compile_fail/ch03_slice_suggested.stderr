@@ -1,0 +1,8 @@
+error[E0515]: cannot return value referencing local variable `words`
+  --> compile_fail/ch03_slice_suggested.rs:12:5
+   |
+12 |     longest_word(&words)
+   |     ^^^^^^^^^^^^^------^
+   |     |            |
+   |     |            `words` is borrowed here
+   |     returns a value referencing data owned by the current function

@@ -1,0 +1,31 @@
+error[E0716]: temporary value dropped while borrowed
+ --> compile_fail/ch05_temporary_dropped.rs:8:22
+  |
+8 |     let name: &str = String::from("config.toml").as_str();
+  |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^         - temporary value is freed at the end of this statement
+  |                      |
+  |                      creates a temporary value which is freed while still in use
+9 |     name.len()
+  |     ---- borrow later used here
+  |
+help: consider using a `let` binding to create a longer lived value
+  |
+8 ~     let binding = String::from("config.toml");
+9 ~     let name: &str = binding.as_str();
+  |
+
+error[E0716]: temporary value dropped while borrowed
+  --> compile_fail/ch05_temporary_dropped.rs:15:40
+   |
+15 |     let path = std::convert::identity(&String::from("/etc/app"));
+   |                                        ^^^^^^^^^^^^^^^^^^^^^^^^ - temporary value is freed at the end of this statement
+   |                                        |
+   |                                        creates a temporary value which is freed while still in use
+16 |     path.len()
+   |     ---- borrow later used here
+   |
+help: consider using a `let` binding to create a longer lived value
+   |
+15 ~     let binding = String::from("/etc/app");
+16 ~     let path = std::convert::identity(&binding);
+   |

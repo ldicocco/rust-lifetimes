@@ -1,0 +1,2 @@
+[Ident("let"), Ident("total"), Punct('='), Ident("price"), Punct('*'), Number("3"), Punct('+'), Str("tax"), Punct(';')]
+kept 8 tokens, the last is Some(Number("2"))

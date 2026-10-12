@@ -1,0 +1,10 @@
+error: lifetime may not live long enough
+  --> compile_fail/ch02_lending_promise.rs:16:9
+   |
+11 | impl<'src> Normalizer<'src> {
+   |      ---- lifetime `'src` defined here
+12 |     pub fn next_line(&mut self) -> Option<&'src str> {
+   |                      - let's call the lifetime of this reference `'1`
+...
+16 |         Some(&self.buffer) // borrows `self`, not the text
+   |         ^^^^^^^^^^^^^^^^^^ method was supposed to return data with lifetime `'src` but it is returning data with lifetime `'1`

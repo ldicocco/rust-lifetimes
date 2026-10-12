@@ -1,0 +1,33 @@
+// How rustc fills in the elided lifetimes of a function signature.
+digraph G {
+  graph [bgcolor="white", fontname="Helvetica", fontsize=11, pad=0.2, nodesep=0.35, ranksep=0.45];
+  node  [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11,
+         color="#475569", fillcolor="#f1f5f9", penwidth=1.2, margin="0.12,0.06"];
+  edge  [color="#475569", fontname="Helvetica", fontsize=10, arrowsize=0.7];
+
+  sig    [label="a signature with elided lifetimes"];
+  rule1  [label="rule 1: every elided lifetime in the parameters\nbecomes a fresh lifetime parameter",
+          fillcolor="#dbeafe", color="#1d4ed8"];
+  out    [label="any elided lifetime\nin the return type?"];
+  done   [label="done: the inputs are independent",
+          fillcolor="#dcfce7", color="#15803d"];
+  self   [label="a receiver with references\nto Self (or a type containing Self)?"];
+  rule3  [label="rule 3: the output gets the\nlifetime of that reference",
+          fillcolor="#dcfce7", color="#15803d"];
+  one    [label="exactly one parameter mentions lifetimes,\nand it mentions exactly one?"];
+  rule2  [label="rule 2: the output gets\nthat lifetime",
+          fillcolor="#dcfce7", color="#15803d"];
+  e0106  [label="error E0106:\nmissing lifetime specifier",
+          fillcolor="#fee2e2", color="#b91c1c"];
+
+  sig -> rule1 -> out;
+  out -> done  [label=" no"];
+  out -> self  [label=" yes"];
+  self -> rule3 [label=" exactly one"];
+  self -> one   [label=" none"];
+  self -> e0106 [label=" two or more"];
+  one -> rule2  [label=" yes"];
+  one -> e0106  [label=" no"];
+  {rank=same; rule3; one;}
+  {rank=same; rule2; e0106;}
+}

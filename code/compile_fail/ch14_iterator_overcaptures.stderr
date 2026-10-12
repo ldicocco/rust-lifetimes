@@ -1,0 +1,11 @@
+error[E0716]: temporary value dropped while borrowed
+  --> compile_fail/ch14_iterator_overcaptures.rs:17:5
+   |
+16 | pub fn words_of(src: &str) -> impl Iterator<Item = &str> {
+   |                      - let's call the lifetime of this reference `'1`
+17 |     Index { src }.words()
+   |     ^^^^^^^^^^^^^--------
+   |     |                   |
+   |     |                   temporary value is freed at the end of this statement
+   |     creates a temporary value which is freed while still in use
+   |     argument requires that borrow lasts for `'1`

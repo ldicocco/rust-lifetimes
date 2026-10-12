@@ -1,0 +1,3 @@
+sum before restocking: 6, items now: [1, 2, 3, 4]
+Some(Some("8080"))
+Some(None)

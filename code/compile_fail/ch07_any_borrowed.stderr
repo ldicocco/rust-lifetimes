@@ -1,0 +1,12 @@
+error: lifetime may not live long enough
+  --> compile_fail/ch07_any_borrowed.rs:14:5
+   |
+13 | pub fn erase<'src>(token: Token<'src>) -> Box<dyn Any> {
+   |              ---- lifetime `'src` defined here
+14 |     Box::new(token)
+   |     ^^^^^^^^^^^^^^^ coercion requires that `'src` must outlive `'static`
+   |
+help: to declare that the trait object captures data from argument `token`, you can add an explicit `'src` lifetime bound
+   |
+13 | pub fn erase<'src>(token: Token<'src>) -> Box<dyn Any + 'src> {
+   |                                                       ++++++

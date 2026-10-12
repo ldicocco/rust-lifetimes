@@ -1,0 +1,12 @@
+error[E0597]: `local` does not live long enough
+  --> fail_13_invariance.rs:9:27
+   |
+6  |     let mut s: &'static str = "static";
+   |                ------------ type annotation requires that `local` is borrowed for `'static`
+7  |     {
+8  |         let local = String::from("local");
+   |             ----- binding `local` declared here
+9  |         overwrite(&mut s, &local); // would leave `s` dangling
+   |                           ^^^^^^ borrowed value does not live long enough
+10 |     }
+   |     - `local` dropped here while still borrowed

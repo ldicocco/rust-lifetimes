@@ -1,0 +1,18 @@
+error[E0597]: `config` does not live long enough
+  --> compile_fail/ch11_spawn_borrow_call.rs:21:18
+   |
+20 |     let config = String::from("listen port 8080");
+   |         ------ binding `config` declared here
+21 |     spawn(report(&config));
+   |     -------------^^^^^^^--
+   |     |            |
+   |     |            borrowed value does not live long enough
+   |     argument requires that `config` is borrowed for `'static`
+22 | }
+   | - `config` dropped here while still borrowed
+   |
+note: requirement that the value outlives `'static` introduced here
+  --> compile_fail/ch11_spawn_borrow_call.rs:9:37
+   |
+ 9 |     F: Future<Output = ()> + Send + 'static,
+   |                                     ^^^^^^^

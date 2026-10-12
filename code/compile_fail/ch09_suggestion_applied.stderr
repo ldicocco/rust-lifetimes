@@ -1,0 +1,11 @@
+error[E0597]: `sep` does not live long enough
+  --> compile_fail/ch09_suggestion_applied.rs:14:25
+   |
+13 |         let sep = String::from("=");
+   |             --- binding `sep` declared here
+14 |         head = f(&text, &sep);
+   |                         ^^^^ borrowed value does not live long enough
+15 |     }
+   |     - `sep` dropped here while still borrowed
+16 |     head.to_string()
+   |     ---- borrow later used here

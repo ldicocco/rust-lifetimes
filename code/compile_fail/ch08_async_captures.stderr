@@ -1,0 +1,11 @@
+error[E0597]: `key` does not live long enough
+  --> compile_fail/ch08_async_captures.rs:14:30
+   |
+13 |         let key = String::from("port");
+   |             --- binding `key` declared here
+14 |         future = store.fetch(&key);
+   |                              ^^^^ borrowed value does not live long enough
+15 |     } // `key` is dropped here
+   |     - `key` dropped here while still borrowed
+16 |     drop(future);
+   |          ------ borrow later used here

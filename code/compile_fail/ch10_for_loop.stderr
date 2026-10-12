@@ -1,0 +1,11 @@
+error[E0277]: `L` is not an iterator
+  --> compile_fail/ch10_for_loop.rs:16:18
+   |
+16 |     for _item in lender {
+   |                  ^^^^^^ `L` is not an iterator
+   |
+   = note: required for `L` to implement `IntoIterator`
+help: consider further restricting type parameter `L` with trait `Iterator`
+   |
+14 | pub fn count_items<L: LendingIterator + std::iter::Iterator>(lender: L) -> usize {
+   |                                       +++++++++++++++++++++

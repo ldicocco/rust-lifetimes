@@ -1,0 +1,10 @@
+error[E0499]: cannot borrow `collector` as mutable more than once at a time
+  --> compile_fail/ch04_mut_self_lock.rs:23:5
+   |
+22 |     collector.add(&text);
+   |     --------- first mutable borrow occurs here
+23 |     collector.add(&more);
+   |     ^^^^^^^^^
+   |     |
+   |     second mutable borrow occurs here
+   |     first borrow later used here

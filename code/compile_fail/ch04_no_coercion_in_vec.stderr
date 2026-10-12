@@ -1,0 +1,15 @@
+error[E0308]: mismatched types
+  --> compile_fail/ch04_no_coercion_in_vec.rs:14:15
+   |
+14 |     total_len(names) + one.len()
+   |     --------- ^^^^^ expected `Vec<&str>`, found `Vec<&String>`
+   |     |
+   |     arguments to this function are incorrect
+   |
+   = note: expected struct `Vec<&str>`
+              found struct `Vec<&String>`
+note: function defined here
+  --> compile_fail/ch04_no_coercion_in_vec.rs:6:4
+   |
+ 6 | fn total_len(names: Vec<&str>) -> usize {
+   |    ^^^^^^^^^ ----------------

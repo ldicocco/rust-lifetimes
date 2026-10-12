@@ -1,0 +1,4 @@
+2 entries
+with a Ref alive: RefCell already borrowed
+still readable: Some("open notes.txt")
+after drop: got a RefMut

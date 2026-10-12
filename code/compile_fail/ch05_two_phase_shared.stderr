@@ -1,0 +1,9 @@
+error[E0502]: cannot borrow `text` as mutable because it is also borrowed as immutable
+ --> compile_fail/ch05_two_phase_shared.rs:7:5
+  |
+7 |     text.push_str(&text);
+  |     ^^^^^--------^-----^
+  |     |    |        |
+  |     |    |        immutable borrow occurs here
+  |     |    immutable borrow later used by call
+  |     mutable borrow occurs here

@@ -1,0 +1,13 @@
+error[E0597]: `text` does not live long enough
+  --> fail_20_static_field_local.rs:8:26
+   |
+7  |     let text = String::from("hello");
+   |         ---- binding `text` declared here
+8  |     let l = Literal { r: &text }; // a borrow of a local is not 'static
+   |                          ^^^^^
+   |                          |
+   |                          borrowed value does not live long enough
+   |                          this usage requires that `text` is borrowed for `'static`
+9  |     println!("{}", l.r);
+10 | }
+   | - `text` dropped here while still borrowed

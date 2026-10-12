@@ -1,0 +1,2 @@
+["red", "green", "blue"]
+18 bytes of text

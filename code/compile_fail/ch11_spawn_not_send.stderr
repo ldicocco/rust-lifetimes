@@ -1,0 +1,26 @@
+error: future cannot be sent between threads safely
+  --> compile_fail/ch11_spawn_not_send.rs:18:5
+   |
+18 | /     spawn(async {
+19 | |         let shared = Rc::new(String::from("listen port 8080"));
+20 | |         tick().await;
+21 | |         println!("{shared}");
+22 | |     });
+   | |______^ future created by async block is not `Send`
+   |
+   = help: within `{async block@compile_fail/ch11_spawn_not_send.rs:18:11: 18:16}`, the trait `Send` is not implemented for `Rc<String>`
+note: future is not `Send` as this value is used across an await
+  --> compile_fail/ch11_spawn_not_send.rs:20:16
+   |
+19 |         let shared = Rc::new(String::from("listen port 8080"));
+   |             ------ has type `Rc<String>` which is not `Send`
+20 |         tick().await;
+   |                ^^^^^ await occurs here, with `shared` maybe used later
+note: required by a bound in `spawn`
+  --> compile_fail/ch11_spawn_not_send.rs:9:30
+   |
+ 7 | pub fn spawn<F>(task: F)
+   |        ----- required by a bound in this function
+ 8 | where
+ 9 |     F: Future<Output = ()> + Send + 'static,
+   |                              ^^^^ required by this bound in `spawn`

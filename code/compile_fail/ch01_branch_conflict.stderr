@@ -1,0 +1,11 @@
+error[E0502]: cannot borrow `*words` as mutable because it is also borrowed as immutable
+  --> compile_fail/ch01_branch_conflict.rs:9:9
+   |
+ 7 |     let first = &words[0];
+   |                  ----- immutable borrow occurs here
+ 8 |     if verbose {
+ 9 |         words.push(String::from("durations"));
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ mutable borrow occurs here
+10 |     }
+11 |     println!("first word: {first}");
+   |                            ----- immutable borrow later used here

@@ -1,0 +1,2 @@
+regions / borrowed
+type_name::<&'static str>() = &str

@@ -1,0 +1,7 @@
+future created; nothing has run yet
+  (running lookup_async for "port")
+result: Some("8080")
+  (running lookup_desugared for "port")
+result: Some("8080")
+sync: Some("8080"), eager: Some("8080")
+words: 3

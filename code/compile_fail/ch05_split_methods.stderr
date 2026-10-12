@@ -1,0 +1,9 @@
+error[E0499]: cannot borrow `*doc` as mutable more than once at a time
+  --> compile_fail/ch05_split_methods.rs:23:17
+   |
+22 |     let title = doc.title_mut();
+   |                 --- first mutable borrow occurs here
+23 |     let words = doc.words_mut();
+   |                 ^^^ second mutable borrow occurs here
+24 |     title.push_str(" (draft)");
+   |     ----- first borrow later used here

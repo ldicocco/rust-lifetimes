@@ -1,0 +1,45 @@
+digraph G {
+  graph [bgcolor="white", fontname="Helvetica", fontsize=11, pad=0.2];
+  node  [shape=plaintext, fontname="Helvetica", fontsize=11];
+  // Region / lifetime: #dbeafe   Value alive: #ffedd5
+  // Accepted: #dcfce7            Conflict: #fee2e2
+  t [label=<
+  <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#94a3b8">
+    <TR>
+      <TD BGCOLOR="#f1f5f9" ALIGN="LEFT"><B>program point</B></TD>
+      <TD BGCOLOR="#f1f5f9"><B>local is alive</B></TD>
+      <TD BGCOLOR="#f1f5f9"><B>F: Fn(&amp;'a str)</B><BR/>'a picked by the caller</TD>
+      <TD BGCOLOR="#f1f5f9"><B>F: for&lt;'a&gt; Fn(&amp;'a str)</B><BR/>'a picked at each call of f</TD>
+    </TR>
+    <TR>
+      <TD ALIGN="LEFT">caller: with_local(…) begins</TD>
+      <TD></TD>
+      <TD BGCOLOR="#dbeafe">'a</TD>
+      <TD></TD>
+    </TR>
+    <TR>
+      <TD ALIGN="LEFT">let local = String::from(…)</TD>
+      <TD BGCOLOR="#ffedd5">local</TD>
+      <TD BGCOLOR="#dbeafe">'a</TD>
+      <TD></TD>
+    </TR>
+    <TR>
+      <TD ALIGN="LEFT">f(&amp;local)</TD>
+      <TD BGCOLOR="#ffedd5">local</TD>
+      <TD BGCOLOR="#dbeafe">'a: &amp;local must last to the end</TD>
+      <TD BGCOLOR="#dcfce7">'a: just this call</TD>
+    </TR>
+    <TR>
+      <TD ALIGN="LEFT">end of body: local is dropped</TD>
+      <TD BGCOLOR="#ffedd5">dropped</TD>
+      <TD BGCOLOR="#fee2e2">'a still live: error E0597</TD>
+      <TD></TD>
+    </TR>
+    <TR>
+      <TD ALIGN="LEFT">caller: with_local(…) returns</TD>
+      <TD></TD>
+      <TD BGCOLOR="#dbeafe">'a</TD>
+      <TD></TD>
+    </TR>
+  </TABLE>>];
+}

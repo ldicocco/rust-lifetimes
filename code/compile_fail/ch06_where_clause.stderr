@@ -1,0 +1,5 @@
+error[E0637]: `'_` cannot be used here
+ --> compile_fail/ch06_where_clause.rs:8:25
+  |
+8 |     I: Iterator<Item = &'_ str>,
+  |                         ^^ `'_` is a reserved lifetime name

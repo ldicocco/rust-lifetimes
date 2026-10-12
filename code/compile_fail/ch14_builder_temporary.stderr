@@ -1,0 +1,15 @@
+error[E0716]: temporary value dropped while borrowed
+  --> compile_fail/ch14_builder_temporary.rs:34:17
+   |
+34 |     let query = QueryBuilder::new("users").filter("age > 30");
+   |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^                   - temporary value is freed at the end of this statement
+   |                 |
+   |                 creates a temporary value which is freed while still in use
+35 |     query.filter("active");
+   |     ----- borrow later used here
+   |
+help: consider using a `let` binding to create a longer lived value
+   |
+34 ~     let mut binding = QueryBuilder::new("users");
+35 ~     let query = binding.filter("age > 30");
+   |

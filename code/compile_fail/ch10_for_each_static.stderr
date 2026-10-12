@@ -1,0 +1,19 @@
+error[E0521]: borrowed data escapes outside of function
+  --> compile_fail/ch10_for_each_static.rs:53:5
+   |
+47 | pub fn reverse_triples(values: &mut Vec<i32>) {
+   |                        ------  - let's call the lifetime of this reference `'1`
+   |                        |
+   |                        `values` is a reference that is only valid in the function body
+...
+53 |     windows.for_each(|triple| triple.reverse());
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |     |
+   |     `values` escapes the function body here
+   |     argument requires that `'1` must outlive `'static`
+   |
+note: due to a current limitation of the type system, this implies a `'static` lifetime
+  --> compile_fail/ch10_for_each_static.rs:16:12
+   |
+16 |         F: FnMut(Self::Item<'_>),
+   |            ^^^^^^^^^^^^^^^^^^^^^

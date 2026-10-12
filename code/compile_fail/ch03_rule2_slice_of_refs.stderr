@@ -1,0 +1,11 @@
+error[E0106]: missing lifetime specifier
+ --> compile_fail/ch03_rule2_slice_of_refs.rs:6:40
+  |
+6 | pub fn longest_word(words: &[&str]) -> &str {
+  |                            -------     ^ expected named lifetime parameter
+  |
+  = help: this function's return type contains a borrowed value, but the signature does not say which one of `words`'s 2 lifetimes it is borrowed from
+help: consider introducing a named lifetime parameter
+  |
+6 | pub fn longest_word<'a>(words: &'a [&'a str]) -> &'a str {
+  |                    ++++         ++   ++           ++

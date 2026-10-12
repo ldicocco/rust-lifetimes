@@ -1,0 +1,4 @@
+todo.md: Some(30) bytes
+notes.txt: 2 owners
+from a thread: notes.txt, todo.md
+draft: 3 owners

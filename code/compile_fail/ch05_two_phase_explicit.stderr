@@ -1,0 +1,8 @@
+error[E0502]: cannot borrow `lengths` as immutable because it is also borrowed as mutable
+ --> compile_fail/ch05_two_phase_explicit.rs:7:29
+  |
+7 |     Vec::push(&mut lengths, lengths.len());
+  |     --------- ------------  ^^^^^^^ immutable borrow occurs here
+  |     |         |
+  |     |         mutable borrow occurs here
+  |     mutable borrow later used by call

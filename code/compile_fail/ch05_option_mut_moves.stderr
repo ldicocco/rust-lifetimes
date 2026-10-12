@@ -1,0 +1,17 @@
+error[E0382]: use of moved value: `counter`
+  --> compile_fail/ch05_option_mut_moves.rs:14:10
+   |
+12 | pub fn bump_twice(counter: Option<&mut u32>) {
+   |                   ------- move occurs because `counter` has type `Option<&mut u32>`, which does not implement the `Copy` trait
+13 |     bump(counter);
+   |          ------- value moved here
+14 |     bump(counter);
+   |          ^^^^^^^ value used here after move
+   |
+note: consider changing this parameter type in function `bump` to borrow instead if owning the value isn't necessary
+  --> compile_fail/ch05_option_mut_moves.rs:6:18
+   |
+ 6 | fn bump(counter: Option<&mut u32>) {
+   |    ----          ^^^^^^^^^^^^^^^^ this parameter takes ownership of the value
+   |    |
+   |    in this function

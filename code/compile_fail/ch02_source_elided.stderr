@@ -1,0 +1,11 @@
+error[E0499]: cannot borrow `*source` as mutable more than once at a time
+  --> compile_fail/ch02_source_elided.rs:12:29
+   |
+10 | pub fn collect_all<S: Source>(source: &mut S) -> Vec<&str> {
+   |                                       - let's call the lifetime of this reference `'1`
+11 |     let mut pieces = Vec::new();
+12 |     while let Some(piece) = source.next_piece() {
+   |                             ^^^^^^ `*source` was mutably borrowed here in the previous iteration of the loop
+...
+15 |     pieces
+   |     ------ returning this value requires that `*source` is borrowed for `'1`

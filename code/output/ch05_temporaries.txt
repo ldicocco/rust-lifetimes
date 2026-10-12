@@ -1,0 +1,27 @@
+1. end of statement
+  make a
+  drop a
+  after the let, len = 1
+2. lifetime extension
+  make b
+  after the let, still holding b
+  drop b
+  after the block
+3. match scrutinee
+  make c
+  in the arm, n = 1
+  drop c
+  after the match
+4. if let scrutinee
+  make dog
+  in the then-branch, i = 1
+  drop dog
+  make cat
+  drop cat
+  in the else-branch
+5. tail expression
+  make local
+  make tail
+  drop tail
+  drop local
+  returned 4

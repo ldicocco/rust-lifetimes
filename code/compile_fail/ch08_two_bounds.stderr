@@ -1,0 +1,10 @@
+error[E0228]: cannot deduce the lifetime bound for this trait object type from context
+  --> compile_fail/ch08_two_bounds.rs:17:39
+   |
+17 | pub fn area_of(item: &Labeled<'_, '_, dyn Shape>) -> f64 {
+   |                                       ^^^^^^^^^
+   |
+help: please supply an explicit bound
+   |
+17 | pub fn area_of(item: &Labeled<'_, '_, dyn Shape + /* 'a */>) -> f64 {
+   |                                                 ++++++++++

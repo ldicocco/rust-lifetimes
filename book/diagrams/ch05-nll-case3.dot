@@ -1,0 +1,23 @@
+// NLL problem case #3: the control-flow graph of `cached`
+// (code/compile_fail/ch05_nll_case3.rs).
+digraph G {
+  graph [bgcolor="white", fontname="Helvetica", fontsize=11, pad=0.2, nodesep=0.35, ranksep=0.45];
+  node  [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11,
+         color="#475569", fillcolor="#f1f5f9", penwidth=1.2, margin="0.12,0.06"];
+  edge  [color="#475569", fontname="Helvetica", fontsize=10, arrowsize=0.7];
+
+  get    [label="cache.get(word)\ncreates loan L (shared borrow of *cache)",
+          fillcolor="#ffedd5", color="#c2410c"];
+  test   [label="is it Some(found)?"];
+  ret    [label="return found\nL must last for all of 'm",
+          fillcolor="#dbeafe", color="#1d4ed8"];
+  insert [label="cache.insert(..) needs &mut *cache\nNLL: L is live here (rejected)\nPolonius: L is dead here (accepted)",
+          fillcolor="#fee2e2", color="#b91c1c"];
+  index  [label="&cache[word]\nreturned with a new loan",
+          fillcolor="#dcfce7", color="#15803d"];
+
+  get -> test;
+  test -> ret    [label=" Some"];
+  test -> insert [label=" None"];
+  insert -> index;
+}

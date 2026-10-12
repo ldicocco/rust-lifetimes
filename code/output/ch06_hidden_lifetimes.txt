@@ -1,0 +1,2 @@
+3 long words
+2 entries: ["listen on port 8080 for incoming requests", "port 8080"]

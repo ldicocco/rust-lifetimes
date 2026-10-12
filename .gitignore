@@ -1,0 +1,12 @@
+# Cargo build output (at any level)
+target/
+
+# Book build intermediates (tools/pdf_build.py)
+/book/.build/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# OS
+.DS_Store

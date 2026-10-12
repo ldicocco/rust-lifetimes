@@ -1,0 +1,9 @@
+error: lifetime may not live long enough
+  --> compile_fail/ch06_impl_unrelated.rs:13:9
+   |
+11 | impl<'src> Parser<'_> {
+   |      ---- lifetime `'src` defined here
+12 |     pub fn rest(&self) -> &'src str {
+   |                 ----- has type `&Parser<'1>`
+13 |         &self.input[self.pos..]
+   |         ^^^^^^^^^^^^^^^^^^^^^^^ method was supposed to return data with lifetime `'src` but it is returning data with lifetime `'1`

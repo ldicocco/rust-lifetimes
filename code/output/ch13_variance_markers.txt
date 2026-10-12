@@ -1,0 +1,1 @@
+covariant, contravariant and invariant handles all compile

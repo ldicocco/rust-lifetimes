@@ -1,0 +1,27 @@
+error: lifetime may not live long enough
+ --> fail_21_rule_first.rs:7:5
+  |
+6 | fn lookup<'k, 't>(key: &'k str, table: &'t Table) -> Option<&'k str> {
+  |           --  -- lifetime `'t` defined here
+  |           |
+  |           lifetime `'k` defined here
+7 |     table.rows.iter().find(|row| row.0 == key).map(|row| row.1.as_str())
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ function was supposed to return data with lifetime `'k` but it is returning data with lifetime `'t`
+  |
+  = help: consider adding the following bound: `'t: 'k`
+help: consider adding 'move' keyword before the nested closure
+  |
+7 |     table.rows.iter().find(|row| row.0 == key).map(move |row| row.1.as_str())
+  |                                                    ++++
+
+error[E0597]: `key` does not live long enough
+  --> fail_21_rule_first.rs:15:22
+   |
+14 |         let key = String::from("a"); // a temporary key ...
+   |             --- binding `key` declared here
+15 |         hit = lookup(&key, &table);
+   |                      ^^^^ borrowed value does not live long enough
+16 |     } // ... dies here, but the result comes from `table`
+   |     - `key` dropped here while still borrowed
+17 |     println!("{hit:?}");
+   |               ------- borrow later used here

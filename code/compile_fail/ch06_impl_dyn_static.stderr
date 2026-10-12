@@ -1,0 +1,24 @@
+error[E0521]: borrowed data escapes outside of function
+  --> compile_fail/ch06_impl_dyn_static.rs:17:5
+   |
+16 | pub fn report(shape: &dyn Shape) -> String {
+   |               -----  - let's call the lifetime of this reference `'1`
+   |               |
+   |               `shape` is a reference that is only valid in the function body
+17 |     shape.describe()
+   |     ^^^^^^^^^^^^^^^^
+   |     |
+   |     `shape` escapes the function body here
+   |     argument requires that `'1` must outlive `'static`
+   |
+note: the used `impl` has a `'static` requirement
+  --> compile_fail/ch06_impl_dyn_static.rs:10:10
+   |
+10 | impl dyn Shape {
+   |          ^^^^^ this has an implicit `'static` lifetime requirement
+11 |     pub fn describe(&self) -> String {
+   |            -------- calling this method introduces the `impl`'s `'static` requirement
+help: consider relaxing the implicit `'static` requirement
+   |
+10 | impl dyn Shape + '_ {
+   |                ++++

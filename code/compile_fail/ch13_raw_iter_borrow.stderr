@@ -1,0 +1,9 @@
+error[E0502]: cannot borrow `words` as mutable because it is also borrowed as immutable
+  --> compile_fail/ch13_raw_iter_borrow.rs:43:5
+   |
+42 |     let first = RawIter::new(&words).next();
+   |                              ------ immutable borrow occurs here
+43 |     words.push(String::from("8080")); // may reallocate: `first` would dangle
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ mutable borrow occurs here
+44 |     println!("{first:?}");
+   |                ----- immutable borrow later used here

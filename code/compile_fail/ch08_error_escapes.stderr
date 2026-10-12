@@ -1,0 +1,8 @@
+error[E0515]: cannot return value referencing local variable `line`
+  --> compile_fail/ch08_error_escapes.rs:29:16
+   |
+29 |     let port = parse_port(&line)?;
+   |                ^^^^^^^^^^^-----^^
+   |                |          |
+   |                |          `line` is borrowed here
+   |                returns a value referencing data owned by the current function

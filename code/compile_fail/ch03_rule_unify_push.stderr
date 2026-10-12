@@ -1,0 +1,10 @@
+error[E0502]: cannot borrow `list` as immutable because it is also borrowed as mutable
+  --> compile_fail/ch03_rule_unify_push.rs:16:26
+   |
+15 |     push(&mut list, &first);
+   |          --------- mutable borrow occurs here
+16 |     println!("{} items", list.len()); // any later use of `list` is rejected
+   |                          ^^^^
+   |                          |
+   |                          immutable borrow occurs here
+   |                          mutable borrow later used here

@@ -1,0 +1,24 @@
+error[E0597]: `config` does not live long enough
+  --> compile_fail/ch10_hrtb_static.rs:50:16
+   |
+48 |     let config = String::from("port 8080\nlog-level debug");
+   |         ------ binding `config` declared here
+49 |     let lines = NormalizedLines {
+50 |         lines: config.lines(),
+   |                ^^^^^^ borrowed value does not live long enough
+...
+53 |     print_all(lines);
+   |     ---------------- argument requires that `config` is borrowed for `'static`
+54 | }
+   | - `config` dropped here while still borrowed
+   |
+note: due to a current limitation of the type system, this implies a `'static` lifetime
+  --> compile_fail/ch10_hrtb_static.rs:38:5
+   |
+38 |     for<'a> L::Item<'a>: Debug,
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: requirement that the value outlives `'static` introduced here
+  --> compile_fail/ch10_hrtb_static.rs:38:26
+   |
+38 |     for<'a> L::Item<'a>: Debug,
+   |                          ^^^^^

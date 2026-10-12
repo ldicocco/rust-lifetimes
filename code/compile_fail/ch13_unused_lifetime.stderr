@@ -1,0 +1,7 @@
+error[E0392]: lifetime parameter `'a` is never used
+ --> compile_fail/ch13_unused_lifetime.rs:6:20
+  |
+6 | pub struct RawIter<'a, T> {
+  |                    ^^ unused lifetime parameter
+  |
+  = help: consider removing `'a`, referring to it in a field, or using a marker such as `PhantomData`

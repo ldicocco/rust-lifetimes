@@ -1,0 +1,11 @@
+error[E0597]: `history` does not live long enough
+  --> compile_fail/ch12_guard_outlives_cell.rs:12:19
+   |
+11 |         let history = RefCell::new(vec![String::from("open")]);
+   |             ------- binding `history` declared here
+12 |         entries = history.borrow();
+   |                   ^^^^^^^ borrowed value does not live long enough
+13 |     }
+   |     - `history` dropped here while still borrowed
+14 |     entries.len()
+   |     ------- borrow later used here

@@ -1,0 +1,46 @@
+error: lifetime may not live long enough
+  --> compile_fail/ch04_invariant_cells.rs:11:5
+   |
+ 8 | pub fn shrink_ref_cell<'long: 'short, 'short>(
+   |                        -----          ------ lifetime `'short` defined here
+   |                        |
+   |                        lifetime `'long` defined here
+...
+11 |     c
+   |     ^ function was supposed to return data with lifetime `'long` but it is returning data with lifetime `'short`
+   |
+   = help: consider adding the following bound: `'short: 'long`
+   = note: requirement occurs because of the type `RefCell<&str>`, which makes the generic argument `&str` invariant
+   = note: the struct `RefCell<T>` is invariant over the parameter `T`
+   = help: see <https://doc.rust-lang.org/nomicon/subtyping.html> for more information about variance
+
+error: lifetime may not live long enough
+  --> compile_fail/ch04_invariant_cells.rs:17:5
+   |
+14 | pub fn shrink_unsafe_cell<'long: 'short, 'short>(
+   |                           -----          ------ lifetime `'short` defined here
+   |                           |
+   |                           lifetime `'long` defined here
+...
+17 |     c
+   |     ^ function was supposed to return data with lifetime `'long` but it is returning data with lifetime `'short`
+   |
+   = help: consider adding the following bound: `'short: 'long`
+   = note: requirement occurs because of the type `UnsafeCell<&str>`, which makes the generic argument `&str` invariant
+   = note: the struct `UnsafeCell<T>` is invariant over the parameter `T`
+   = help: see <https://doc.rust-lang.org/nomicon/subtyping.html> for more information about variance
+
+error: lifetime may not live long enough
+  --> compile_fail/ch04_invariant_cells.rs:21:5
+   |
+20 | pub fn shrink_mutex<'long: 'short, 'short>(m: Mutex<&'long str>) -> Mutex<&'short str> {
+   |                     -----          ------ lifetime `'short` defined here
+   |                     |
+   |                     lifetime `'long` defined here
+21 |     m
+   |     ^ function was supposed to return data with lifetime `'long` but it is returning data with lifetime `'short`
+   |
+   = help: consider adding the following bound: `'short: 'long`
+   = note: requirement occurs because of the type `std::sync::Mutex<&str>`, which makes the generic argument `&str` invariant
+   = note: the struct `std::sync::Mutex<T>` is invariant over the parameter `T`
+   = help: see <https://doc.rust-lang.org/nomicon/subtyping.html> for more information about variance

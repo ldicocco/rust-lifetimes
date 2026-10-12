@@ -1,0 +1,4 @@
+moved:  alpha beta gamma
+shared: [5, 4, 5]
+scoped: total 14, longest gamma
+still mine: ["alpha", "beta", "gamma"]

@@ -1,0 +1,18 @@
+error: lifetime may not live long enough
+ --> compile_fail/ch06_never_equal.rs:7:5
+  |
+6 | pub fn remember(seen: &mut Vec<&'_ str>, word: &'_ str) {
+  |                                -               - let's call the lifetime of this reference `'1`
+  |                                |
+  |                                let's call the lifetime of this reference `'2`
+7 |     seen.push(word);
+  |     ^^^^^^^^^^^^^^^ argument requires that `'1` must outlive `'2`
+  |
+  = note: requirement occurs because of a mutable reference to `Vec<&str>`
+  = note: mutable references are invariant over their type parameter
+  = help: see <https://doc.rust-lang.org/nomicon/subtyping.html> for more information about variance
+help: consider introducing a named lifetime parameter
+  |
+6 - pub fn remember(seen: &mut Vec<&'_ str>, word: &'_ str) {
+6 + pub fn remember<'a>(seen: &mut Vec<&'a str>, word: &'a str) {
+  |

@@ -1,0 +1,11 @@
+error[E0597]: `inner` does not live long enough
+  --> compile_fail/ch01_signature_contract.rs:18:40
+   |
+17 |         let inner = String::from("short");
+   |             ----- binding `inner` declared here
+18 |         result = first(outer.as_str(), inner.as_str());
+   |                                        ^^^^^ borrowed value does not live long enough
+19 |     }
+   |     - `inner` dropped here while still borrowed
+20 |     println!("{result}");
+   |                ------ borrow later used here

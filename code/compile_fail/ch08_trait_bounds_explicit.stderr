@@ -1,0 +1,12 @@
+error[E0597]: `local` does not live long enough
+  --> compile_fail/ch08_trait_bounds_explicit.rs:25:14
+   |
+24 |     let local = Upper;
+   |         ----- binding `local` declared here
+25 |     describe(&local)
+   |     ---------^^^^^^-
+   |     |        |
+   |     |        borrowed value does not live long enough
+   |     argument requires that `local` is borrowed for `'static`
+26 | }
+   | - `local` dropped here while still borrowed

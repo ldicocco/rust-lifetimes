@@ -1,0 +1,9 @@
+error[E0499]: cannot borrow `log` as mutable more than once at a time
+ --> compile_fail/ch01_two_mutable.rs:8:16
+  |
+7 |     let header = &mut log;
+  |                  -------- first mutable borrow occurs here
+8 |     let body = &mut log; // `header` is still live: it is used below
+  |                ^^^^^^^^ second mutable borrow occurs here
+9 |     header.push_str("== report ==\n");
+  |     ------ first borrow later used here

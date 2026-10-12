@@ -1,0 +1,12 @@
+error[E0597]: `name` does not live long enough
+  --> compile_fail/ch01_annotation_static.rs:8:33
+   |
+ 7 |     let name = String::from("config.toml");
+   |         ---- binding `name` declared here
+ 8 |     let forever: &'static str = &name; // asks for a borrow that never ends
+   |                  ------------   ^^^^^ borrowed value does not live long enough
+   |                  |
+   |                  type annotation requires that `name` is borrowed for `'static`
+ 9 |     println!("{forever}");
+10 | }
+   | - `name` dropped here while still borrowed

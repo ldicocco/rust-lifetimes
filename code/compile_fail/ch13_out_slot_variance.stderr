@@ -1,0 +1,12 @@
+error[E0597]: `temporary` does not live long enough
+  --> compile_fail/ch13_out_slot_variance.rs:33:18
+   |
+29 |     let mut name: &'static str = "static";
+   |                   ------------ type annotation requires that `temporary` is borrowed for `'static`
+...
+32 |         let temporary = String::from("temporary");
+   |             --------- binding `temporary` declared here
+33 |         slot.set(&temporary);
+   |                  ^^^^^^^^^^ borrowed value does not live long enough
+34 |     }
+   |     - `temporary` dropped here while still borrowed

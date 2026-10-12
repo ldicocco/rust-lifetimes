@@ -1,0 +1,7 @@
+regions, not durations
+lifetimes are regions
+hello
+regions
+5
+18
+[8, 3, 9, 6, 4]

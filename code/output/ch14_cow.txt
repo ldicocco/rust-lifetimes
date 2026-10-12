@@ -1,0 +1,6 @@
+borrowed  plain text
+owned     a &lt; b &amp;&amp; c
+kept      x &gt; 0
+borrowed  id
+owned     score_2026
+2 columns sent to a thread

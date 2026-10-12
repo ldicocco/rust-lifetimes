@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  book:
+    name: Book sources
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Check includes, anchors and image links
+        run: python3 tools/build_book.py check
+      - name: Check that the generated Markdown and README are up to date
+        run: |
+          python3 tools/build_book.py md
+          python3 tools/build_book.py readme
+          git diff --exit-code -- book/chapters README.md
+
+  rust:
+    name: Examples and diagnostics
+    runs-on: ubuntu-latest
+    env:
+      RUSTFLAGS: -D warnings
+    steps:
+      - uses: actions/checkout@v5
+      # The toolchain is pinned in code/rust-toolchain.toml; rustup on the
+      # runner installs it on first use.
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: code
+      - name: Formatting
+        working-directory: code
+        run: |
+          cargo fmt --all --check
+          rustfmt --edition 2024 --check compile_fail/*.rs
+      - name: Examples (outputs) and compile-fail programs (diagnostics)
+        run: python3 tools/run_examples.py --rust --compile-fail

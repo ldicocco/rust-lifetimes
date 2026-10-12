@@ -1,0 +1,9 @@
+error[E0499]: cannot borrow `p` as mutable more than once at a time
+  --> fail_03_elided_self.rs:31:13
+   |
+30 |     let a = p.next_word();
+   |             - first mutable borrow occurs here
+31 |     let b = p.next_word(); // second &mut borrow while `a` is live
+   |             ^ second mutable borrow occurs here
+32 |     println!("{a:?} {b:?}");
+   |               ----- first borrow later used here

@@ -1,0 +1,12 @@
+error[E0106]: missing lifetime specifier
+ --> compile_fail/ch06_ambiguous.rs:8:53
+  |
+8 | pub fn first_word(text: &str, separators: &str) -> &'_ str {
+  |                         ----              ----      ^^ expected named lifetime parameter
+  |
+  = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `text` or `separators`
+help: consider introducing a named lifetime parameter
+  |
+8 - pub fn first_word(text: &str, separators: &str) -> &'_ str {
+8 + pub fn first_word<'a>(text: &'a str, separators: &'a str) -> &'a str {
+  |

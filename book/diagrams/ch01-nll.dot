@@ -1,0 +1,54 @@
+// The NLL timeline of code/examples/ch01_nll.rs: the borrow `&v[0]` is live
+// from its creation to its last use, so `v.push(4)` does not overlap it; a
+// lexical rule would keep it alive to the end of the block.
+digraph G {
+  graph [bgcolor="white", fontname="Helvetica", fontsize=11, pad=0.2, nodesep=0.35, ranksep=0.45];
+  node  [shape=plaintext, fontname="Helvetica", fontsize=11];
+
+  timeline [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#475569">
+      <TR>
+        <TD><B>#</B></TD>
+        <TD ALIGN="LEFT"><B>statement</B></TD>
+        <TD><B>lexical scope<BR/>of first (old rule)</B></TD>
+        <TD><B>NLL region<BR/>of the borrow &amp;v[0]</B></TD>
+        <TD><B>access<BR/>to v</B></TD>
+      </TR>
+      <TR>
+        <TD>1</TD>
+        <TD ALIGN="LEFT">let mut v = vec![1, 2, 3];</TD>
+        <TD></TD>
+        <TD></TD>
+        <TD></TD>
+      </TR>
+      <TR>
+        <TD>2</TD>
+        <TD ALIGN="LEFT">let first = &amp;v[0];</TD>
+        <TD BGCOLOR="#f1f5f9">live</TD>
+        <TD BGCOLOR="#dbeafe">created</TD>
+        <TD BGCOLOR="#ffedd5">shared</TD>
+      </TR>
+      <TR>
+        <TD>3</TD>
+        <TD ALIGN="LEFT">println!(&quot;{first}&quot;);</TD>
+        <TD BGCOLOR="#f1f5f9">live</TD>
+        <TD BGCOLOR="#dbeafe">last use</TD>
+        <TD></TD>
+      </TR>
+      <TR>
+        <TD>4</TD>
+        <TD ALIGN="LEFT">v.push(4);</TD>
+        <TD BGCOLOR="#fee2e2">overlap: rejected</TD>
+        <TD BGCOLOR="#dcfce7">no overlap: accepted</TD>
+        <TD BGCOLOR="#ffedd5">mutable</TD>
+      </TR>
+      <TR>
+        <TD>5</TD>
+        <TD ALIGN="LEFT">println!(&quot;{v:?}&quot;);</TD>
+        <TD BGCOLOR="#f1f5f9">live</TD>
+        <TD></TD>
+        <TD BGCOLOR="#ffedd5">shared</TD>
+      </TR>
+    </TABLE>
+  >];
+}

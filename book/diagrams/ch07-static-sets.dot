@@ -1,0 +1,37 @@
+// The two meanings of 'static as sets of types (Chapter 7).
+digraph G {
+  graph [bgcolor="white", fontname="Helvetica", fontsize=11, pad=0.2, nodesep=0.35, ranksep=0.45];
+  node  [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11,
+         color="#475569", fillcolor="#f1f5f9", penwidth=1.2, margin="0.12,0.06"];
+  edge  [color="#475569", fontname="Helvetica", fontsize=10, arrowsize=0.7];
+
+  subgraph cluster_all {
+    label="all types T"; labeljust="l"; style="rounded,filled";
+    fillcolor="#f8fafc"; color="#475569"; penwidth=1.2; margin=14;
+
+    subgraph cluster_static {
+      label="T: 'static  (holds no borrow that can expire)"; labeljust="l";
+      style="rounded,filled"; fillcolor="#dcfce7"; color="#15803d"; penwidth=1.2;
+      margin=12;
+
+      owned [label="String,  Vec<u8>,  i32\lRc<String>,  Box<dyn Error>\lNoisy  (a type with Drop)\lfn(&str) -> usize\lmove || owned.len()\l",
+             fillcolor="white", color="#15803d"];
+
+      subgraph cluster_refs {
+        label="&'static T  (references)"; labeljust="l";
+        style="rounded,filled,dashed"; fillcolor="#dbeafe"; color="#1d4ed8";
+        penwidth=1.2; margin=10;
+        refs [label="\"a literal\":  &'static str\lconst LIMITS:  &'static [u32]\lBox::leak(..),  String::leak(..)\lOnceLock::get_or_init(..)\l",
+              fillcolor="white", color="#1d4ed8"];
+      }
+    }
+
+    subgraph cluster_short {
+      label="only T: 'a  (holds a shorter borrow)"; labeljust="l";
+      style="rounded,filled"; fillcolor="#ffedd5"; color="#c2410c"; penwidth=1.2;
+      margin=12;
+      short [label="&'a str,  &'a mut Vec<u8>\lLine<'a>,  Chars<'a>\lBox<dyn Fn() + 'a>\l|| text.len()  (borrows text)\l",
+             fillcolor="white", color="#c2410c"];
+    }
+  }
+}

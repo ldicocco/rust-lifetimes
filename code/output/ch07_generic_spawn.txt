@@ -1,0 +1,2 @@
+dropping a table of 1000 rows
+joined

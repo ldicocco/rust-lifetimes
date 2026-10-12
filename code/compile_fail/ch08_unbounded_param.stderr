@@ -1,0 +1,14 @@
+error[E0597]: `radius` does not live long enough
+  --> compile_fail/ch08_unbounded_param.rs:32:35
+   |
+31 |       let radius = 1.0;
+   |           ------ binding `radius` declared here
+32 |       let circle = Circle { radius: &radius };
+   |                                     ^^^^^^^ borrowed value does not live long enough
+33 | /     describe(&Labeled {
+34 | |         label: "unit circle",
+35 | |         value: &circle,
+36 | |     })
+   | |______- argument requires that `radius` is borrowed for `'static`
+37 |   }
+   |   - `radius` dropped here while still borrowed

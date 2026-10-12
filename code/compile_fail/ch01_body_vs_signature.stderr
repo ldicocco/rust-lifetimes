@@ -1,0 +1,11 @@
+error: lifetime may not live long enough
+ --> compile_fail/ch01_body_vs_signature.rs:7:40
+  |
+6 | fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
+  |            --  -- lifetime `'b` defined here
+  |            |
+  |            lifetime `'a` defined here
+7 |     if x.len() >= y.len() { x } else { y }
+  |                                        ^ function was supposed to return data with lifetime `'a` but it is returning data with lifetime `'b`
+  |
+  = help: consider adding the following bound: `'b: 'a`

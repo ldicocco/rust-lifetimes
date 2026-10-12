@@ -1,0 +1,9 @@
+error[E0499]: cannot borrow `*normalizer` as mutable more than once at a time
+  --> compile_fail/ch02_lending_keep.rs:22:18
+   |
+21 |     let first = normalizer.next_line();
+   |                 ---------- first mutable borrow occurs here
+22 |     let second = normalizer.next_line(); // would overwrite what `first` shows
+   |                  ^^^^^^^^^^ second mutable borrow occurs here
+23 |     println!("{first:?} {second:?}");
+   |                ----- first borrow later used here

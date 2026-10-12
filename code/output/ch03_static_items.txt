@@ -1,0 +1,2 @@
+hello: ["parser", "engine", "tokenizer"]
+delimiters: [' ', ',', ';']

@@ -1,0 +1,4 @@
+  (computing the summary)
+"lifetimes are regions" == "lifetimes are regions"
+summary read 2 times
+last token: "1"

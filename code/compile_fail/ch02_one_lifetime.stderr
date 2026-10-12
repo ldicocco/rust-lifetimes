@@ -1,0 +1,12 @@
+error[E0597]: `pattern` does not live long enough
+  --> compile_fail/ch02_one_lifetime.rs:28:34
+   |
+27 |         let pattern = String::from("port");
+   |             ------- binding `pattern` declared here
+28 |         let finder = Finder::new(&pattern, &text);
+   |                                  ^^^^^^^^ borrowed value does not live long enough
+29 |         found = finder.first_line_with();
+30 |     } // `pattern` is dropped here
+   |     - `pattern` dropped here while still borrowed
+31 |     println!("{found:?}");
+   |                ----- borrow later used here

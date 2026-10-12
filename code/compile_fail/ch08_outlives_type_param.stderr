@@ -1,0 +1,12 @@
+error[E0309]: the parameter type `T` may not live long enough
+  --> compile_fail/ch08_outlives_type_param.rs:17:5
+   |
+16 | pub fn labeled<'a, T: Display>(label: &'a str, value: T) -> impl Display + 'a {
+   |                -- the parameter type `T` must be valid for the lifetime `'a` as defined here...
+17 |     Labeled(label, value)
+   |     ^^^^^^^^^^^^^^^^^^^^^ ...so that the type `T` will meet its required lifetime bounds
+   |
+help: consider adding an explicit lifetime bound
+   |
+16 | pub fn labeled<'a, T: Display + 'a>(label: &'a str, value: T) -> impl Display + 'a {
+   |                               ++++

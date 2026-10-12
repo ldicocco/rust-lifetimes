@@ -1,0 +1,8 @@
+error: implementation of `Parse` is not general enough
+  --> compile_fail/ch09_trait_param_borrow.rs:25:30
+   |
+25 |     let word: Option<&str> = parse_local(b"words");
+   |                              ^^^^^^^^^^^^^^^^^^^^^ implementation of `Parse` is not general enough
+   |
+   = note: `Parse<'0>` would have to be implemented for the type `&str`, for any lifetime `'0`...
+   = note: ...but `Parse<'1>` is actually implemented for the type `&'1 str`, for some specific lifetime `'1`

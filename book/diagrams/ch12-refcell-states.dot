@@ -1,0 +1,21 @@
+// The run-time borrow state of a RefCell (code/examples/ch12_refcell_guard.rs).
+digraph G {
+  graph [bgcolor="white", fontname="Helvetica", fontsize=11, pad=0.2, nodesep=0.6, ranksep=0.55];
+  node  [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11,
+         color="#475569", fillcolor="#f1f5f9", penwidth=1.2, margin="0.12,0.06"];
+  edge  [color="#475569", fontname="Helvetica", fontsize=10, arrowsize=0.7];
+
+  unused  [label="not borrowed"];
+  reading [label="reading\nn ≥ 1 Ref guards", fillcolor="#dbeafe", color="#1d4ed8"];
+  writing [label="writing\none RefMut guard", fillcolor="#ffedd5", color="#c2410c"];
+  fail    [label="borrow_mut panics\ntry_borrow_mut is Err", fillcolor="#fee2e2", color="#b91c1c"];
+  fail2   [label="borrow, borrow_mut panic\ntry_borrow, try_borrow_mut are Err", fillcolor="#fee2e2", color="#b91c1c"];
+
+  unused -> reading  [label=" borrow()"];
+  reading -> unused  [label=" last Ref dropped"];
+  reading -> reading [label=" borrow() / drop a Ref"];
+  unused -> writing  [label=" borrow_mut()"];
+  writing -> unused  [label=" RefMut dropped"];
+  reading -> fail    [label=" borrow_mut()", style=dashed, color="#b91c1c"];
+  writing -> fail2   [label=" any borrow", style=dashed, color="#b91c1c"];
+}

@@ -1,0 +1,8 @@
+error[E0515]: cannot return value referencing temporary value
+  --> compile_fail/ch12_return_ref_from_guard.rs:14:9
+   |
+14 |         self.entries.borrow().last().map(|entry| entry.as_str())
+   |         ---------------------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |         |
+   |         returns a value referencing data owned by the current function
+   |         temporary value created here

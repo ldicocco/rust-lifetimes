@@ -1,0 +1,17 @@
+error[E0515]: cannot return reference to temporary value
+ --> compile_fail/ch07_not_promoted.rs:9:5
+  |
+9 |     &String::new() // `String` has a destructor: not promoted
+  |     ^-------------
+  |     ||
+  |     |temporary value created here
+  |     returns a reference to data owned by the current function
+
+error[E0515]: cannot return reference to temporary value
+  --> compile_fail/ch07_not_promoted.rs:13:5
+   |
+13 |     &Cell::new(0) // interior mutability: not promoted
+   |     ^------------
+   |     ||
+   |     |temporary value created here
+   |     returns a reference to data owned by the current function

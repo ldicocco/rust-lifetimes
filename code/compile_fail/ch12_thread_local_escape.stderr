@@ -1,0 +1,8 @@
+error: lifetime may not live long enough
+  --> compile_fail/ch12_thread_local_escape.rs:11:26
+   |
+11 |     GREETING.with(|text| text.as_str())
+   |                    ----- ^^^^^^^^^^^^^ returning this value requires that `'1` must outlive `'2`
+   |                    |   |
+   |                    |   return type of closure is &'2 str
+   |                    has type `&'1 String`

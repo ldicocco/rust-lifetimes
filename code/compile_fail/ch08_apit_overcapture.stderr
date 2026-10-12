@@ -1,0 +1,27 @@
+error[E0597]: `word` does not live long enough
+  --> compile_fail/ch08_apit_overcapture.rs:17:22
+   |
+16 |         let word = String::from("hello");
+   |             ---- binding `word` declared here
+17 |         loud = shout(&word);
+   |                      ^^^^^ borrowed value does not live long enough
+18 |     }
+   |     - `word` dropped here while still borrowed
+19 |     loud.to_string()
+   |     ---- borrow later used here
+   |
+note: this call may capture more lifetimes than intended, because Rust 2024 has adjusted the `impl Trait` lifetime capture rules
+  --> compile_fail/ch08_apit_overcapture.rs:17:16
+   |
+17 |         loud = shout(&word);
+   |                ^^^^^^^^^^^^
+note: you could use a `use<...>` bound to explicitly specify captures, but argument-position `impl Trait`s are not nameable
+  --> compile_fail/ch08_apit_overcapture.rs:9:22
+   |
+ 9 | pub fn shout(value: &impl Display) -> impl Display {
+   |                      ^^^^^^^^^^^^
+help: use the precise capturing `use<...>` syntax to make the captures explicit
+   |
+ 9 - pub fn shout(value: &impl Display) -> impl Display {
+ 9 + pub fn shout<T: Display>(value: &T) -> impl Display + use<T> {
+   |

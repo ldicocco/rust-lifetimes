@@ -1,0 +1,8 @@
+[("alpha", 5), ("beta", 4), ("gamma", 5)]
+inside the block: locked
+after the block: free
+while let, job emit: locked
+while let, job check: locked
+while let, job parse: locked
+loop, job check: free
+loop, job parse: free

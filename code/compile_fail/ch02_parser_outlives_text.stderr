@@ -1,0 +1,11 @@
+error[E0597]: `text` does not live long enough
+  --> compile_fail/ch02_parser_outlives_text.rs:21:30
+   |
+20 |         let text = String::from("lifetimes are regions");
+   |             ---- binding `text` declared here
+21 |         parser = Parser::new(&text);
+   |                              ^^^^^ borrowed value does not live long enough
+22 |     } // `text` is dropped here
+   |     - `text` dropped here while still borrowed
+23 |     println!("{} at {}", parser.input, parser.pos);
+   |                          ------------ borrow later used here

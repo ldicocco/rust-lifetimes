@@ -1,0 +1,11 @@
+error[E0106]: missing lifetime specifier
+ --> fail_19_struct_single_ref.rs:3:8
+  |
+3 |     r: &str,
+  |        ^ expected named lifetime parameter
+  |
+help: consider introducing a named lifetime parameter
+  |
+2 ~ struct Holder<'a> {
+3 ~     r: &'a str,
+  |

@@ -1,0 +1,13 @@
+error[E0310]: the parameter type `T` may not live long enough
+ --> fail_14_E0310.rs:4:5
+  |
+4 |     thread::spawn(move || drop(t));
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     |
+  |     the parameter type `T` must be valid for the static lifetime...
+  |     ...so that the type `T` will meet its required lifetime bounds
+  |
+help: consider adding an explicit lifetime bound
+  |
+3 | fn spawn_drop<T: Send + 'static>(t: T) {
+  |                       +++++++++

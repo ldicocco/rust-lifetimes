@@ -1,0 +1,8 @@
+error[E0515]: cannot return value referencing local variable `buf`
+  --> compile_fail/ch13_bounded_slice.rs:37:5
+   |
+37 |     buf.as_bytes()
+   |     ---^^^^^^^^^^^
+   |     |
+   |     returns a value referencing data owned by the current function
+   |     `buf` is borrowed here

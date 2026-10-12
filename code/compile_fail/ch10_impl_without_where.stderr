@@ -1,0 +1,32 @@
+error[E0477]: the type `WindowsMut<'s, T>` does not fulfill the required lifetime
+  --> compile_fail/ch10_impl_without_where.rs:21:21
+   |
+ 6 |     type Item<'a>
+   |     ------------- definition of `Item` from trait
+...
+21 |     type Item<'a> = &'a mut [T]; // no `where Self: 'a`
+   |                     ^^^^^^^^^^^
+   |
+note: type must outlive the lifetime `'a` as defined here
+  --> compile_fail/ch10_impl_without_where.rs:21:15
+   |
+21 |     type Item<'a> = &'a mut [T]; // no `where Self: 'a`
+   |               ^^
+help: copy the `where` clause predicates from the trait
+   |
+21 |     type Item<'a> = &'a mut [T] where Self: 'a; // no `where Self: 'a`
+   |                                 ++++++++++++++
+
+error[E0309]: the parameter type `T` may not live long enough
+  --> compile_fail/ch10_impl_without_where.rs:21:5
+   |
+21 |     type Item<'a> = &'a mut [T]; // no `where Self: 'a`
+   |     ^^^^^^^^^^--^
+   |     |         |
+   |     |         the parameter type `T` must be valid for the lifetime `'a` as defined here...
+   |     ...so that the reference type `&'a mut [T]` does not outlive the data it points at
+   |
+help: consider adding an explicit lifetime bound
+   |
+21 |     type Item<'a> = &'a mut [T] where T: 'a; // no `where Self: 'a`
+   |                                 +++++++++++

@@ -1,0 +1,45 @@
+{\renewcommand{\arraystretch}{1.05}\begin{longtable}{@{}p{4.8cm}p{1.4cm}p{1.5cm}p{7.0cm}@{}}
+\toprule \textbf{Program} & \textbf{Expected} & \textbf{Result} & \textbf{First diagnostic} \\\midrule\endhead
+\texttt{\detokenize{fail_01_dangling.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0597]: `inner` does not live long enough}}}\\
+\texttt{\detokenize{ok_01_longest.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_02_nll.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable}}}\\
+\texttt{\detokenize{ok_02_nll.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_03_elided_self.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0499]: cannot borrow `p` as mutable more than once at a time}}}\\
+\texttt{\detokenize{ok_03_parser.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_04_ambiguous.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0106]: missing lifetime specifier  (+1 more)}}}\\
+\texttt{\detokenize{ok_04_underscore_return.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{warning: hidden lifetime parameters in types are deprecated}}}\\
+\texttt{\detokenize{fail_05_dyn_static.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error: lifetime may not live long enough}}}\\
+\texttt{\detokenize{ok_05_dyn_underscore.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_06_rpit.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0700]: hidden type for `impl Iterator<Item = char>` captures lifetime that doe...}}}\\
+\texttt{\detokenize{ok_06_rpit.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{ok_07_static_sources.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_08_static_bound.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0597]: `local` does not live long enough}}}\\
+\texttt{\detokenize{ok_08_static_bound.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_09_spawn_borrow.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0373]: closure may outlive the current function, but it borrows `data`, which ...}}}\\
+\texttt{\detokenize{ok_09_threads.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_10_boxed_static.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error: lifetime may not live long enough}}}\\
+\texttt{\detokenize{ok_10_object_defaults.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_11_error_box.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error: lifetime may not live long enough}}}\\
+\texttt{\detokenize{ok_11_error_box.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0597]: `text` does not live long enough}}}\\
+\texttt{\detokenize{ok_12_hrtb.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_13_invariance.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0597]: `local` does not live long enough}}}\\
+\texttt{\detokenize{ok_13_covariance.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_14_E0310.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0310]: the parameter type `T` may not live long enough}}}\\
+\texttt{\detokenize{ok_14_E0310_fixed.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_15_static_table_no.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0597]: `s` does not live long enough  (+2 more)}}}\\
+\texttt{\detokenize{ok_15_static_table.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_16_struct_field_elided.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0106]: missing lifetime specifier  (+2 more)}}}\\
+\texttt{\detokenize{fail_17_cell_invariance.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0597]: `local` does not live long enough}}}\\
+\texttt{\detokenize{ok_17_box_covariance.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_18_elision_cases.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0106]: missing lifetime specifier  (+1 more)}}}\\
+\texttt{\detokenize{ok_18_elision_fixes.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_19_struct_single_ref.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0106]: missing lifetime specifier}}}\\
+\texttt{\detokenize{ok_19_struct_fixes.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_20_static_field_local.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0597]: `text` does not live long enough}}}\\
+\texttt{\detokenize{fail_21_rule_first.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error: lifetime may not live long enough  (+1 more)}}}\\
+\texttt{\detokenize{ok_21_lookup_explicit.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_22_rule_unify.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0597]: `key` does not live long enough}}}\\
+\texttt{\detokenize{fail_23_contract_v2.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0597]: `short` does not live long enough}}}\\
+\texttt{\detokenize{ok_23_contract_v1.rs}} & compiles & \textcolor{okgreen}{pass} & {\scriptsize ---}\\
+\texttt{\detokenize{fail_24_trait_no_body.rs}} & rejected & \textcolor{okgreen}{pass} & {\scriptsize \texttt{\detokenize{error[E0106]: missing lifetime specifier}}}\\
+\bottomrule\end{longtable}}

@@ -1,0 +1,14 @@
+error[E0700]: hidden type for `impl Iterator<Item = char>` captures lifetime that does not appear in bounds
+ --> compile_fail/ch08_use_nothing.rs:7:5
+  |
+6 | fn after_prefix<'s>(s: &'s str, prefix: &str) -> impl Iterator<Item = char> + use<> {
+  |                 --                               ---------------------------------- opaque type defined here
+  |                 |
+  |                 hidden type `Chars<'s>` captures the lifetime `'s` as defined here
+7 |     s.strip_prefix(prefix).unwrap_or(s).chars()
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+help: add `'s` to the `use<...>` bound to explicitly capture it
+  |
+6 | fn after_prefix<'s>(s: &'s str, prefix: &str) -> impl Iterator<Item = char> + use<'s> {
+  |                                                                                   ++

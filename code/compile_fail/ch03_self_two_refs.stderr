@@ -1,0 +1,11 @@
+error[E0106]: missing lifetime specifier
+  --> compile_fail/ch03_self_two_refs.rs:11:49
+   |
+11 |     pub fn name(self: &&Self, _caller: &str) -> &str {
+   |                       ------           ----     ^ expected named lifetime parameter
+   |
+   = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from one of `self`'s 2 lifetimes or `_caller`
+help: consider introducing a named lifetime parameter
+   |
+11 |     pub fn name<'a>(self: &'a &'a Self, _caller: &'a str) -> &'a str {
+   |                ++++        ++  ++                 ++          ++

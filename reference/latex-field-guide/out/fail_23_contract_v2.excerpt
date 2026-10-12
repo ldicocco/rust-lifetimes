@@ -1,0 +1,11 @@
+error[E0597]: `short` does not live long enough
+  --> fail_23_contract_v2.rs:12:25
+   |
+11 |         let short = String::from("short");
+   |             ----- binding `short` declared here
+12 |         r = pick(&long, &short); // identical caller code
+   |                         ^^^^^^ borrowed value does not live long enough
+13 |     }
+   |     - `short` dropped here while still borrowed
+14 |     println!("{r}");
+   |               --- borrow later used here

@@ -1,0 +1,20 @@
+error[E0502]: cannot borrow `line` as mutable because it is also borrowed as immutable
+  --> compile_fail/ch14_tokens_outlive_buffer.rs:19:9
+   |
+19 |         line.clear(); // needs `&mut line`...
+   |         ^^^^^^^^^^^^ mutable borrow occurs here
+20 |         line.push_str(text);
+21 |         history.extend(tokenize(&line)); // ...but `history` borrows `line`
+   |         -------                 ----- immutable borrow occurs here
+   |         |
+   |         immutable borrow later used here
+
+error[E0502]: cannot borrow `line` as mutable because it is also borrowed as immutable
+  --> compile_fail/ch14_tokens_outlive_buffer.rs:20:9
+   |
+20 |         line.push_str(text);
+   |         ^^^^^^^^^^^^^^^^^^^ mutable borrow occurs here
+21 |         history.extend(tokenize(&line)); // ...but `history` borrows `line`
+   |         -------                 ----- immutable borrow occurs here
+   |         |
+   |         immutable borrow later used here

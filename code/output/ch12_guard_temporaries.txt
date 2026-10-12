@@ -1,0 +1,8 @@
+match: 2 words, cell is borrowed
+if let, then-branch: alpha, cell is borrowed
+if let, else-branch: cell is free
+after let: 2 words, cell is free
+extended: alpha, cell is borrowed
+while let body: beta, cell is borrowed
+while let body: alpha, cell is borrowed
+entry_count() = 1

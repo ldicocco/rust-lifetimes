@@ -1,0 +1,9 @@
+error[E0502]: cannot borrow `log` as immutable because it is also borrowed as mutable
+  --> compile_fail/ch01_mutable_then_shared.rs:9:16
+   |
+ 8 |     let writer = &mut log;
+   |                  -------- mutable borrow occurs here
+ 9 |     println!("{log}"); // reading `log` needs a shared borrow
+   |                ^^^ immutable borrow occurs here
+10 |     writer.push_str(" end");
+   |     ------ mutable borrow later used here

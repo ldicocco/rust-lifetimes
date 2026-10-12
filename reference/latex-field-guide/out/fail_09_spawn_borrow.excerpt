@@ -1,0 +1,17 @@
+error[E0373]: closure may outlive the current function, but it borrows `data`, which is owned by the current function
+ --> fail_09_spawn_borrow.rs:5:27
+  |
+5 |     let h = thread::spawn(|| println!("{data:?}")); // borrows `data`
+  |                           ^^            ---- `data` is borrowed here
+  |                           |
+  |                           may outlive borrowed value `data`
+  |
+note: function requires argument type to outlive `'static`
+ --> fail_09_spawn_borrow.rs:5:13
+  |
+5 |     let h = thread::spawn(|| println!("{data:?}")); // borrows `data`
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: to force the closure to take ownership of `data` (and any other referenced variables), use the `move` keyword
+  |
+5 |     let h = thread::spawn(move || println!("{data:?}")); // borrows `data`
+  |                           ++++

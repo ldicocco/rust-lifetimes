@@ -1,0 +1,3 @@
+readers: verbose=false and verbose=false; can write: false
+after writing: verbose=true
+log: ["started", "loaded config"]

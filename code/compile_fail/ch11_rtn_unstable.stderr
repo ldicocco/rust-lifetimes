@@ -1,0 +1,7 @@
+error[E0658]: return type notation is experimental
+  --> compile_fail/ch11_rtn_unstable.rs:23:13
+   |
+23 |     T::fetch(..): Send,
+   |             ^^^^
+   |
+   = note: see issue #109417 <https://github.com/rust-lang/rust/issues/109417> for more information

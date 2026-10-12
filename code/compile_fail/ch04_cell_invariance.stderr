@@ -1,0 +1,12 @@
+error[E0597]: `local` does not live long enough
+  --> compile_fail/ch04_cell_invariance.rs:12:14
+   |
+ 9 |     let label: Cell<&'static str> = Cell::new("static");
+   |                ------------------ type annotation requires that `local` is borrowed for `'static`
+10 |     let local = String::from("local");
+   |         ----- binding `local` declared here
+11 |     let view: &Cell<&str> = &label; // Cell<&'static str> is NOT a Cell<&'short str>
+12 |     view.set(&local);
+   |              ^^^^^^ borrowed value does not live long enough
+13 | }
+   | - `local` dropped here while still borrowed

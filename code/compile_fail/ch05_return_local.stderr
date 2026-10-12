@@ -1,0 +1,14 @@
+error[E0515]: cannot return value referencing local variable `text`
+ --> compile_fail/ch05_return_local.rs:8:5
+  |
+8 |     text.split_whitespace().next().unwrap_or("")
+  |     ----^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     |
+  |     returns a value referencing data owned by the current function
+  |     `text` is borrowed here
+
+error[E0515]: cannot return reference to local variable `text`
+  --> compile_fail/ch05_return_local.rs:13:5
+   |
+13 |     &text
+   |     ^^^^^ returns a reference to data owned by the current function

@@ -1,0 +1,14 @@
+error: lifetime may not live long enough
+  --> compile_fail/ch04_struct_invariant.rs:13:5
+   |
+12 | pub fn shrink_slot<'long: 'short, 'short>(s: Slot<'long>) -> Slot<'short> {
+   |                    -----          ------ lifetime `'short` defined here
+   |                    |
+   |                    lifetime `'long` defined here
+13 |     s
+   |     ^ function was supposed to return data with lifetime `'long` but it is returning data with lifetime `'short`
+   |
+   = help: consider adding the following bound: `'short: 'long`
+   = note: requirement occurs because of the type `Slot<'_>`, which makes the generic argument `'_` invariant
+   = note: the struct `Slot<'a>` is invariant over the parameter `'a`
+   = help: see <https://doc.rust-lang.org/nomicon/subtyping.html> for more information about variance

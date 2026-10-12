@@ -1,0 +1,3 @@
+main: started
+worker-1: started
+worker-2: started

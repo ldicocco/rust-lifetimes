@@ -1,0 +1,9 @@
+error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable
+ --> fail_02_nll.rs:4:5
+  |
+3 |     let first = &v[0];
+  |                  - immutable borrow occurs here
+4 |     v.push(4);           // needs &mut v while `first` is still live
+  |     ^^^^^^^^^ mutable borrow occurs here
+5 |     println!("{first}"); // <- this later use keeps the shared borrow alive
+  |               ------- immutable borrow later used here

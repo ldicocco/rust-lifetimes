@@ -1,0 +1,5 @@
+error[E0637]: `'_` cannot be used here
+  --> compile_fail/ch06_assoc_type.rs:11:18
+   |
+11 |     type Item = &'_ str;
+   |                  ^^ `'_` is a reserved lifetime name

@@ -1,0 +1,8 @@
+error[E0515]: cannot return value referencing local variable `sep`
+  --> compile_fail/ch14_one_lifetime.rs:42:5
+   |
+42 |     Fields::new(line, &sep).next().unwrap_or("")
+   |     ^^^^^^^^^^^^^^^^^^----^^^^^^^^^^^^^^^^^^^^^^
+   |     |                 |
+   |     |                 `sep` is borrowed here
+   |     returns a value referencing data owned by the current function

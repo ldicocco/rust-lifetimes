@@ -1,0 +1,42 @@
+// Two versions of the parser of Chapter 2 on the same caller. The first
+// `&mut parser` borrow lasts as long as `first` when the result borrows from
+// `&mut self` (elided), and only for the call when it borrows from `'src`.
+digraph G {
+  graph [bgcolor="white", fontname="Helvetica", fontsize=11, pad=0.2, nodesep=0.35, ranksep=0.45];
+  node  [shape=plaintext, fontname="Helvetica", fontsize=11];
+
+  timeline [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#475569">
+      <TR>
+        <TD ALIGN="LEFT"><B>statement</B></TD>
+        <TD><B>borrow of text<BR/>('src)</B></TD>
+        <TD><B>1st &amp;mut parser<BR/>(returns Option&lt;&amp;str&gt;)</B></TD>
+        <TD><B>1st &amp;mut parser<BR/>(returns Option&lt;&amp;'src str&gt;)</B></TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT">let mut parser = Parser::new(&amp;text);</TD>
+        <TD BGCOLOR="#dbeafe">created</TD>
+        <TD></TD>
+        <TD></TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT">let first = parser.next_word();</TD>
+        <TD BGCOLOR="#dbeafe">live</TD>
+        <TD BGCOLOR="#dbeafe">created</TD>
+        <TD BGCOLOR="#dbeafe">created, ends</TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT">let second = parser.next_word();</TD>
+        <TD BGCOLOR="#dbeafe">live</TD>
+        <TD BGCOLOR="#fee2e2">2nd borrow: E0499</TD>
+        <TD BGCOLOR="#dcfce7">2nd borrow: fine</TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT">println!(&quot;{first:?} {second:?}&quot;);</TD>
+        <TD BGCOLOR="#dbeafe">last use</TD>
+        <TD BGCOLOR="#dbeafe">first used</TD>
+        <TD></TD>
+      </TR>
+    </TABLE>
+  >];
+}

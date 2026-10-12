@@ -1,0 +1,9 @@
+error[E0502]: cannot borrow `transcript` as mutable because it is also borrowed as immutable
+  --> compile_fail/ch01_loop_conflict.rs:11:9
+   |
+11 |         transcript.push_str(word);
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^ mutable borrow occurs here
+12 |         println!("{previous} -> {word}"); // uses the borrow made last time round
+   |                    -------- immutable borrow later used here
+13 |         previous = &transcript[start..];
+   |                     ---------- immutable borrow occurs here

@@ -1,0 +1,32 @@
+// How rustc 1.99 picks the lifetime bound of `dyn Trait` when none is written.
+digraph G {
+  graph [bgcolor="white", fontname="Helvetica", fontsize=11, pad=0.2, nodesep=0.35, ranksep=0.45];
+  node  [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11,
+         color="#475569", fillcolor="#f1f5f9", penwidth=1.2, margin="0.12,0.06"];
+  edge  [color="#475569", fontname="Helvetica", fontsize=10, arrowsize=0.7];
+
+  start [label="dyn Trait, no + 'x written", fillcolor="#ffedd5", color="#c2410c"];
+
+  q1 [label="1. Does Trait or a supertrait\nhave a lifetime bound?"];
+  q2 [label="2. Is dyn Trait the argument of a type\nwhose parameter declares T: 'a?\n(&'a T, &'a mut T, Ref<'a, T>, ...)"];
+  q3 [label="3. Is it written inside\na function body?"];
+
+  r_static_trait [label="+ 'static", fillcolor="#dbeafe", color="#1d4ed8"];
+  r_trait_a [label="+ 'a\n(late-bound 'a in a fn\nsignature: + 'static)", fillcolor="#dbeafe", color="#1d4ed8"];
+  r_e0227 [label="error E0227:\nwrite the bound", fillcolor="#fee2e2", color="#b91c1c"];
+  r_type_a [label="+ 'a", fillcolor="#dbeafe", color="#1d4ed8"];
+  r_e0228 [label="error E0228:\nwrite the bound", fillcolor="#fee2e2", color="#b91c1c"];
+  r_infer [label="inferred from the uses", fillcolor="#dcfce7", color="#15803d"];
+  r_static [label="+ 'static\n(signatures, fields, items)", fillcolor="#dbeafe", color="#1d4ed8"];
+
+  start -> q1;
+  q1 -> r_static_trait [label="  'static"];
+  q1 -> r_trait_a [label="  one bound 'a"];
+  q1 -> r_e0227 [label="  two or more,\n  none 'static"];
+  q1 -> q2 [label="  none"];
+  q2 -> r_type_a [label="  one bound"];
+  q2 -> r_e0228 [label="  two or more\n  (in a signature)"];
+  q2 -> q3 [label="  none"];
+  q3 -> r_infer [label="  yes"];
+  q3 -> r_static [label="  no"];
+}

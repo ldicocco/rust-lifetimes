@@ -1,0 +1,11 @@
+error[E0597]: `key` does not live long enough
+  --> compile_fail/ch03_rule_unify.rs:25:22
+   |
+24 |         let key = String::from("a"); // a temporary key...
+   |             --- binding `key` declared here
+25 |         hit = lookup(&key, table);
+   |                      ^^^^ borrowed value does not live long enough
+26 |     } // ...dropped here, but the result comes from `table`
+   |     - `key` dropped here while still borrowed
+27 |     println!("{hit:?}");
+   |                --- borrow later used here

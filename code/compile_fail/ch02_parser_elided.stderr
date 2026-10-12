@@ -1,0 +1,9 @@
+error[E0499]: cannot borrow `parser` as mutable more than once at a time
+  --> compile_fail/ch02_parser_elided.rs:39:18
+   |
+38 |     let first = parser.next_word();
+   |                 ------ first mutable borrow occurs here
+39 |     let second = parser.next_word(); // a second `&mut parser` while `first` is live
+   |                  ^^^^^^ second mutable borrow occurs here
+40 |     println!("{first:?} {second:?}");
+   |                ----- first borrow later used here

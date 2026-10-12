@@ -1,0 +1,11 @@
+error[E0597]: `inner` does not live long enough
+  --> compile_fail/ch01_longest_dangling.rs:15:42
+   |
+14 |         let inner = String::from("short");
+   |             ----- binding `inner` declared here
+15 |         result = longest(outer.as_str(), inner.as_str());
+   |                                          ^^^^^ borrowed value does not live long enough
+16 |     } // `inner` is dropped here...
+   |     - `inner` dropped here while still borrowed
+17 |     println!("{result}"); // ...but `result` may point into it
+   |                ------ borrow later used here

@@ -1,0 +1,22 @@
+error[E0106]: missing lifetime specifier
+ --> compile_fail/ch09_sugar_two_inputs.rs:8:26
+  |
+8 |     F: Fn(&str, &str) -> &str,
+  |           ----  ----     ^ expected named lifetime parameter
+  |
+  = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from argument 1 or argument 2
+  = note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
+help: consider making the bound lifetime-generic with a new `'a` lifetime
+  |
+8 |     F: for<'a> Fn(&'a str, &'a str) -> &'a str,
+  |        +++++++     ++       ++          ++
+help: consider making the bound lifetime-generic with a new `'a` lifetime
+  |
+8 |     for<'a> F: Fn(&'a str, &'a str) -> &'a str,
+  |     +++++++        ++       ++          ++
+help: consider introducing a named lifetime parameter
+  |
+6 ~ pub fn split_head<'a, F>(f: F) -> String
+7 | where
+8 ~     F: Fn(&'a str, &'a str) -> &'a str,
+  |

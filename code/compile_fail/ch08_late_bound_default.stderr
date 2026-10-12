@@ -1,0 +1,12 @@
+error: lifetime may not live long enough
+  --> compile_fail/ch08_late_bound_default.rs:18:5
+   |
+17 | pub fn boxed_source<'a>(text: &'a str) -> Box<dyn Source<'a>> {
+   |                     -- lifetime `'a` defined here
+18 |     Box::new(text)
+   |     ^^^^^^^^^^^^^^ returning this value requires that `'a` must outlive `'static`
+   |
+help: to declare that the trait object captures data from argument `text`, you can add an explicit `'a` lifetime bound
+   |
+17 | pub fn boxed_source<'a>(text: &'a str) -> Box<dyn Source<'a> + 'a> {
+   |                                                              ++++

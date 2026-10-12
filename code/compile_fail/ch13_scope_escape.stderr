@@ -1,0 +1,13 @@
+error: lifetime may not live long enough
+  --> compile_fail/ch13_scope_escape.rs:10:36
+   |
+10 |     let handle = thread::scope(|s| s.spawn(|| words.len()));
+   |                                 -- ^^^^^^^^^^^^^^^^^^^^^^^ returning this value requires that `'1` must outlive `'2`
+   |                                 ||
+   |                                 |return type of closure is ScopedJoinHandle<'2, usize>
+   |                                 has type `&'1 Scope<'1, '_>`
+   |
+help: consider adding 'move' keyword before the nested closure
+   |
+10 |     let handle = thread::scope(|s| s.spawn(move || words.len()));
+   |                                            ++++

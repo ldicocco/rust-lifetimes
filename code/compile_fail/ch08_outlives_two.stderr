@@ -1,0 +1,11 @@
+error: lifetime may not live long enough
+ --> compile_fail/ch08_outlives_two.rs:7:5
+  |
+6 | pub fn both<'a, 'b>(x: &'a str, y: &'b str) -> impl Iterator<Item = char> + 'a {
+  |             --  -- lifetime `'b` defined here
+  |             |
+  |             lifetime `'a` defined here
+7 |     x.chars().chain(y.chars())
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^ function was supposed to return data with lifetime `'a` but it is returning data with lifetime `'b`
+  |
+  = help: consider adding the following bound: `'b: 'a`

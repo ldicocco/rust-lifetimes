@@ -1,0 +1,11 @@
+error[E0106]: missing lifetime specifier
+ --> fail_24_trait_no_body.rs:3:34
+  |
+3 |     fn pick(x: &str, y: &str) -> &str;
+  |                ----     ----     ^ expected named lifetime parameter
+  |
+  = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from argument 1 or argument 2
+help: consider introducing a named lifetime parameter
+  |
+3 |     fn pick<'a>(x: &'a str, y: &'a str) -> &'a str;
+  |            ++++     ++          ++          ++

@@ -1,0 +1,41 @@
+// The regions of code/examples/ch10_windows_mut.rs: 's (the borrow of readings by
+// the iterator) spans the loop; each item borrows the iterator for its own region,
+// and two item regions never overlap.
+digraph G {
+  graph [bgcolor="white", fontname="Helvetica", fontsize=11, pad=0.2, nodesep=0.35, ranksep=0.45];
+  node  [shape=plaintext, fontname="Helvetica", fontsize=11];
+  timeline [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5" COLOR="#475569">
+      <TR>
+        <TD BGCOLOR="#f1f5f9"><B>program point</B></TD>
+        <TD BGCOLOR="#f1f5f9"><B>'s</B></TD>
+        <TD BGCOLOR="#f1f5f9"><B>item 1</B></TD>
+        <TD BGCOLOR="#f1f5f9"><B>item 2</B></TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT" BGCOLOR="#ffedd5">let mut windows = WindowsMut::new(&amp;mut readings, 2)</TD>
+        <TD BGCOLOR="#dbeafe"> </TD><TD> </TD><TD> </TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT" BGCOLOR="#ffedd5">pair = windows.next()   (1st call)</TD>
+        <TD BGCOLOR="#dbeafe"> </TD><TD BGCOLOR="#dcfce7">'a1</TD><TD> </TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT" BGCOLOR="#ffedd5">pair[1] = pair[0]</TD>
+        <TD BGCOLOR="#dbeafe"> </TD><TD BGCOLOR="#dcfce7">'a1</TD><TD> </TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT" BGCOLOR="#ffedd5">pair = windows.next()   (2nd call)</TD>
+        <TD BGCOLOR="#dbeafe"> </TD><TD> </TD><TD BGCOLOR="#dcfce7">'a2</TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT" BGCOLOR="#ffedd5">pair[1] = pair[0]</TD>
+        <TD BGCOLOR="#dbeafe"> </TD><TD> </TD><TD BGCOLOR="#dcfce7">'a2</TD>
+      </TR>
+      <TR>
+        <TD ALIGN="LEFT" BGCOLOR="#ffedd5">println!("{readings:?}")</TD>
+        <TD> </TD><TD> </TD><TD> </TD>
+      </TR>
+    </TABLE>
+  >];
+}

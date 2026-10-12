@@ -1,0 +1,2 @@
+plugin upper / UPPER
+port = 8080

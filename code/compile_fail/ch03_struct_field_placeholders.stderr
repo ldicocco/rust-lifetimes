@@ -1,0 +1,22 @@
+error[E0106]: missing lifetime specifier
+ --> compile_fail/ch03_struct_field_placeholders.rs:7:12
+  |
+7 |     text: &'_ str,
+  |            ^^ expected named lifetime parameter
+  |
+help: consider introducing a named lifetime parameter
+  |
+6 ~ pub struct Anonymous<'a> {
+7 ~     text: &'a str,
+  |
+
+error[E0261]: use of undeclared lifetime name `'a`
+  --> compile_fail/ch03_struct_field_placeholders.rs:11:12
+   |
+11 |     text: &'a str,
+   |            ^^ undeclared lifetime
+   |
+help: consider introducing lifetime `'a` here
+   |
+10 | pub struct Undeclared<'a> {
+   |                      ++++

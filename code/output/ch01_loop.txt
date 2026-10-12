@@ -1,0 +1,4 @@
+(start) -> regions
+regions -> not
+not -> durations
+last word: durations; transcript: regions not durations

@@ -1,0 +1,12 @@
+error: lifetime may not live long enough
+  --> fail_10_boxed_static.rs:16:5
+   |
+15 | fn boxed(r: &f64) -> Box<dyn Shape> {
+   |             - let's call the lifetime of this reference `'1`
+16 |     Box::new(Circle { r })
+   |     ^^^^^^^^^^^^^^^^^^^^^^ returning this value requires that `'1` must outlive `'static`
+   |
+help: to declare that the trait object captures data from argument `r`, you can add an explicit `'_` lifetime bound
+   |
+15 | fn boxed(r: &f64) -> Box<dyn Shape + '_> {
+   |                                    ++++

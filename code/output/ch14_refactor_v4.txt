@@ -1,0 +1,3 @@
+Warn: 1
+Error: 2
+errors: ["db timeout after 30s", "disk full"]

@@ -1,0 +1,16 @@
+error: lifetime may not live long enough
+  --> fail_11_error_box.rs:18:5
+   |
+17 | fn parse(s: &str) -> Result<i32, Box<dyn Error>> {
+   |             - let's call the lifetime of this reference `'1`
+18 |     s.parse::<i32>().map_err(|_| BadInput { input: s }.into())
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ returning this value requires that `'1` must outlive `'static`
+   |
+help: to declare that the trait object captures data from argument `s`, you can add an explicit `'_` lifetime bound
+   |
+17 | fn parse(s: &str) -> Result<i32, Box<dyn Error + '_>> {
+   |                                                ++++
+help: consider adding 'move' keyword before the nested closure
+   |
+18 |     s.parse::<i32>().map_err(move |_| BadInput { input: s }.into())
+   |                              ++++

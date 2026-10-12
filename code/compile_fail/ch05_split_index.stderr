@@ -1,0 +1,11 @@
+error[E0499]: cannot borrow `words[_]` as mutable more than once at a time
+ --> compile_fail/ch05_split_index.rs:8:13
+  |
+7 |     let a = &mut words[0];
+  |             ------------- first mutable borrow occurs here
+8 |     let b = &mut words[1];
+  |             ^^^^^^^^^^^^^ second mutable borrow occurs here
+9 |     std::mem::swap(a, b);
+  |                    - first borrow later used here
+  |
+  = help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices

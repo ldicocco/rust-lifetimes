@@ -1,0 +1,11 @@
+error[E0106]: missing lifetime specifier
+  --> compile_fail/ch03_self_by_value.rs:11:31
+   |
+11 |     pub fn into_text(self) -> &str {
+   |                               ^ expected named lifetime parameter
+   |
+   = help: this function's return type contains a borrowed value, but there is no value for it to be borrowed from
+help: consider using the `'a` lifetime
+   |
+11 |     pub fn into_text(self) -> &'a str {
+   |                                ++

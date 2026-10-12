@@ -1,0 +1,14 @@
+error[E0505]: cannot move out of `doc` because it is borrowed
+  --> compile_fail/ch13_self_ref_move.rs:18:17
+   |
+12 |     let mut doc = Document {
+   |         ------- binding `doc` declared here
+...
+16 |     doc.title = doc.text.lines().next().unwrap_or("");
+   |                 -------- borrow of `doc.text` occurs here
+17 |     println!("{}", doc.title); // fine: used in place
+18 |     let moved = doc; // a move would leave `title` pointing at the old place
+   |                 ^^^
+   |                 |
+   |                 move out of `doc` occurs here
+   |                 borrow later used here

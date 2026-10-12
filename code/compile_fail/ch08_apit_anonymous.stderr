@@ -1,0 +1,11 @@
+error[E0658]: anonymous lifetimes in `impl Trait` are unstable
+ --> compile_fail/ch08_apit_anonymous.rs:6:45
+  |
+6 | pub fn longest(words: impl Iterator<Item = &'_ str>) -> usize {
+  |                                             ^^ expected named lifetime parameter
+  |
+help: consider introducing a named lifetime parameter
+  |
+6 - pub fn longest(words: impl Iterator<Item = &'_ str>) -> usize {
+6 + pub fn longest<'a>(words: impl Iterator<Item = &'a str>) -> usize {
+  |

@@ -1,0 +1,47 @@
+// The outlives order on regions induces subtyping on shared references.
+digraph G {
+  graph [bgcolor="white", fontname="Helvetica", fontsize=11, pad=0.2, nodesep=0.35, ranksep=0.45];
+  node  [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11,
+         color="#475569", fillcolor="#f1f5f9", penwidth=1.2, margin="0.12,0.06"];
+  edge  [color="#475569", fontname="Helvetica", fontsize=10, arrowsize=0.7];
+
+  timeline [shape=plain, style="", label=<
+    <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2" CELLPADDING="3">
+      <TR><TD ALIGN="RIGHT">'static</TD>
+          <TD COLSPAN="10" BGCOLOR="#1d4ed8"><FONT COLOR="white">the whole program</FONT></TD></TR>
+      <TR><TD ALIGN="RIGHT">'a</TD>
+          <TD COLSPAN="2"></TD><TD COLSPAN="7" BGCOLOR="#93c5fd">a borrow of a long-lived value</TD><TD></TD></TR>
+      <TR><TD ALIGN="RIGHT">'b</TD>
+          <TD COLSPAN="4"></TD><TD COLSPAN="3" BGCOLOR="#dbeafe">a short borrow</TD><TD COLSPAN="3"></TD></TR>
+      <TR><TD></TD>
+          <TD WIDTH="34">p1</TD><TD WIDTH="34">p2</TD><TD WIDTH="34">p3</TD><TD WIDTH="34">p4</TD>
+          <TD WIDTH="34">p5</TD><TD WIDTH="34">p6</TD><TD WIDTH="34">p7</TD><TD WIDTH="34">p8</TD>
+          <TD WIDTH="34">p9</TD><TD WIDTH="34">p10</TD></TR>
+      <TR><TD></TD><TD COLSPAN="10" ALIGN="RIGHT"><I>program points →</I></TD></TR>
+    </TABLE>>];
+
+  subgraph regions {
+    node [fillcolor="#dbeafe", color="#1d4ed8"];
+    rs [label="'static"];
+    ra [label="'a"];
+    rb [label="'b"];
+  }
+  subgraph types {
+    ts [label="&'static T"];
+    ta [label="&'a T"];
+    tb [label="&'b T"];
+  }
+
+  timeline -> rs [style=invis];
+  timeline -> ts [style=invis];
+  rs -> ra [label=" outlives"];
+  ra -> rb [label=" outlives"];
+  ts -> ta [label=" is a subtype of"];
+  ta -> tb [label=" is a subtype of"];
+  rs -> ts [style=dashed, arrowhead=none, constraint=false];
+  ra -> ta [style=dashed, arrowhead=none, constraint=false];
+  rb -> tb [style=dashed, arrowhead=none, constraint=false];
+  {rank=same; rs; ts;}
+  {rank=same; ra; ta;}
+  {rank=same; rb; tb;}
+}

@@ -1,0 +1,14 @@
+error[E0597]: `name` does not live long enough
+  --> compile_fail/ch03_static_field_local.rs:13:31
+   |
+11 |     let name = String::from("hello");
+   |         ---- binding `name` declared here
+12 |     // A borrow of a local variable is not 'static:
+13 |     let lit = Literal { text: &name };
+   |                               ^^^^^
+   |                               |
+   |                               borrowed value does not live long enough
+   |                               this usage requires that `name` is borrowed for `'static`
+14 |     println!("{}", lit.text);
+15 | }
+   | - `name` dropped here while still borrowed

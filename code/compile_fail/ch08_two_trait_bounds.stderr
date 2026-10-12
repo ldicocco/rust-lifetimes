@@ -1,0 +1,5 @@
+error[E0227]: ambiguous lifetime bound, explicit lifetime bound required
+  --> compile_fail/ch08_two_trait_bounds.rs:11:36
+   |
+11 | pub type BoxedLookup<'k, 'v> = Box<dyn Lookup<'k, 'v>>;
+   |                                    ^^^^^^^^^^^^^^^^^^

@@ -1,0 +1,17 @@
+error: lifetime may not live long enough
+ --> compile_fail/ch03_push_elided.rs:7:5
+  |
+6 | pub fn push(list: &mut Vec<&str>, item: &str) {
+  |                            -            - let's call the lifetime of this reference `'1`
+  |                            |
+  |                            let's call the lifetime of this reference `'2`
+7 |     list.push(item);
+  |     ^^^^^^^^^^^^^^^ argument requires that `'1` must outlive `'2`
+  |
+  = note: requirement occurs because of a mutable reference to `Vec<&str>`
+  = note: mutable references are invariant over their type parameter
+  = help: see <https://doc.rust-lang.org/nomicon/subtyping.html> for more information about variance
+help: consider introducing a named lifetime parameter
+  |
+6 | pub fn push<'a>(list: &mut Vec<&'a str>, item: &'a str) {
+  |            ++++                 ++              ++

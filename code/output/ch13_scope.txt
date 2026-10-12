@@ -1,0 +1,2 @@
+a scoped thread sees 3 words
+after the scope: 14 bytes, and `words` is ours again: ["listen", "port", "8080"]

@@ -1,0 +1,12 @@
+error[E0597]: `short_lived` does not live long enough
+  --> compile_fail/ch03_contract_v2.rs:19:36
+   |
+17 |         let short_lived = String::from("short");
+   |             ----------- binding `short_lived` declared here
+18 |         // Identical caller code:
+19 |         result = pick(&long_lived, &short_lived);
+   |                                    ^^^^^^^^^^^^ borrowed value does not live long enough
+20 |     }
+   |     - `short_lived` dropped here while still borrowed
+21 |     println!("{result}");
+   |                ------ borrow later used here

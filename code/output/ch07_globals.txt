@@ -1,0 +1,5 @@
+(loading config)
+indexer with 4 workers
+(building keyword table)
+static -> Some(3)
+struct -> None

@@ -1,0 +1,9 @@
+error[E0499]: cannot borrow `*words` as mutable more than once at a time
+ --> compile_fail/ch05_reborrow_frozen.rs:8:5
+  |
+7 |     let other = &mut *words;
+  |                 ----------- first mutable borrow occurs here
+8 |     words.push(String::from("alpha"));
+  |     ^^^^^ second mutable borrow occurs here
+9 |     other.push(String::from("beta"));
+  |     ----- first borrow later used here

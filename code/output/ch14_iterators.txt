@@ -1,0 +1,5 @@
+["borrow", "checkers", "check", "borrows"]
+["checkers", "borrows"]
+1: borrow checkers
+2: check borrows
+Some("three")

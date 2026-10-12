@@ -1,0 +1,8 @@
+# The book shows real compiler diagnostics, so the exact compiler is pinned.
+# rustup installs it automatically the first time you run cargo here.
+# rust-src is the standard library's source: rust-analyzer needs it, and with it
+# installed rustc quotes standard-library code in some notes, which the
+# diagnostic snapshots contain.
+[toolchain]
+channel = "1.99.0"
+components = ["rustfmt", "rust-src"]

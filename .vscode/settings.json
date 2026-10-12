@@ -1,0 +1,4 @@
+{
+  // The Cargo workspace is in code/, deeper than rust-analyzer searches.
+  "rust-analyzer.linkedProjects": ["code/Cargo.toml"]
+}

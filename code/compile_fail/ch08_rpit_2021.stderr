@@ -1,0 +1,14 @@
+error[E0700]: hidden type for `impl Iterator<Item = char>` captures lifetime that does not appear in bounds
+ --> compile_fail/ch08_rpit_2021.rs:8:5
+  |
+7 | pub fn chars_of(s: &str) -> impl Iterator<Item = char> {
+  |                    ----     -------------------------- opaque type defined here
+  |                    |
+  |                    hidden type `Chars<'_>` captures the anonymous lifetime defined here
+8 |     s.chars()
+  |     ^^^^^^^^^
+  |
+help: add a `use<...>` bound to explicitly capture `'_`
+  |
+7 | pub fn chars_of(s: &str) -> impl Iterator<Item = char> + use<'_> {
+  |                                                        +++++++++

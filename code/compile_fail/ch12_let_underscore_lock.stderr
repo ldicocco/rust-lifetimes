@@ -1,0 +1,16 @@
+error: non-binding let on a synchronization lock
+  --> compile_fail/ch12_let_underscore_lock.rs:10:9
+   |
+10 |     let _ = queue.lock().unwrap(); // meant to hold the lock
+   |         ^ this lock is not assigned to a binding and is immediately dropped
+   |
+   = note: `#[deny(let_underscore_lock)]` (part of `#[deny(let_underscore)]`) on by default
+help: consider binding to an unused variable to avoid immediately dropping the value
+   |
+10 |     let _unused = queue.lock().unwrap(); // meant to hold the lock
+   |          ++++++
+help: consider immediately dropping the value
+   |
+10 -     let _ = queue.lock().unwrap(); // meant to hold the lock
+10 +     drop(queue.lock().unwrap()); // meant to hold the lock
+   |

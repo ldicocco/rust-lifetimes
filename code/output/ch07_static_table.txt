@@ -1,0 +1,8 @@
+alloc::string::String
+alloc::vec::Vec<alloc::string::String>
+i32
+&str
+alloc::rc::Rc<alloc::string::String>
+alloc::boxed::Box<dyn core::error::Error>
+fn(&'_ str) -> usize
+ch07_static_table::main::{{closure}}

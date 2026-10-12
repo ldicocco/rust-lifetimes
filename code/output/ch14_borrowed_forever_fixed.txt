@@ -1,0 +1,2 @@
+4 distinct words
+5 distinct words: ["the", "cat", "saw", "dog", "end"]

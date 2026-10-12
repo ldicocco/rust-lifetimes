@@ -1,0 +1,12 @@
+error[E0309]: the parameter type `T` may not live long enough
+  --> compile_fail/ch10_helper_without_bounds.rs:17:5
+   |
+16 | impl<'this, 's, T> LendingIteratorLifetime<'this> for WindowsMut<'s, T> {
+   |      ----- the parameter type `T` must be valid for the lifetime `'this` as defined here...
+17 |     type Item = &'this mut [T];
+   |     ^^^^^^^^^ ...so that the reference type `&'this mut [T]` does not outlive the data it points at
+   |
+help: consider adding an explicit lifetime bound
+   |
+16 | impl<'this, 's, T: 'this> LendingIteratorLifetime<'this> for WindowsMut<'s, T> {
+   |                  +++++++

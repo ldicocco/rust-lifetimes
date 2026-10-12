@@ -1,0 +1,9 @@
+error: `impl Trait` must mention the `Self` type of the trait in `use<...>`
+ --> compile_fail/ch08_rpitit_use_self.rs:7:22
+  |
+6 | pub trait Inventory {
+  | ------------------- `Self` type parameter is implicitly captured by this `impl Trait`
+7 |     fn ids(&self) -> impl Iterator<Item = u32> + use<>;
+  |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: currently, all type parameters are required to be mentioned in the precise captures list

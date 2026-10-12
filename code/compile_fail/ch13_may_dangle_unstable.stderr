@@ -1,0 +1,7 @@
+error[E0658]: the `may_dangle` attribute has unstable semantics and may be removed in the future
+  --> compile_fail/ch13_may_dangle_unstable.rs:10:15
+   |
+10 | unsafe impl<#[may_dangle] T> Drop for Log<T> {
+   |               ^^^^^^^^^^
+   |
+   = note: see issue #34761 <https://github.com/rust-lang/rust/issues/34761> for more information

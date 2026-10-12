@@ -1,0 +1,15 @@
+error[E0597]: `prefix` does not live long enough
+  --> compile_fail/ch07_callback_borrow.rs:18:49
+   |
+17 |     let prefix = String::from(">> ");
+   |         ------ binding `prefix` declared here
+18 |     registry.register(Box::new(|line| format!("{prefix}{line}"))); // borrows `prefix`
+   |                       --------------------------^^^^^^----------
+   |                       |        |                |
+   |                       |        |                borrowed value does not live long enough
+   |                       |        value captured here
+   |                       coercion requires that `prefix` is borrowed for `'static`
+19 | }
+   | - `prefix` dropped here while still borrowed
+   |
+   = note: due to object lifetime defaults, `Box<dyn for<'a> Fn(&'a str) -> String>` actually means `Box<(dyn for<'a> Fn(&'a str) -> String + 'static)>`

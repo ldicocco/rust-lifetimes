@@ -1,0 +1,9 @@
+error[E0499]: cannot borrow `lender` as mutable more than once at a time
+  --> compile_fail/ch10_two_items.rs:16:18
+   |
+15 |     let first = lender.next();
+   |                 ------ first mutable borrow occurs here
+16 |     let second = lender.next();
+   |                  ^^^^^^ second mutable borrow occurs here
+17 |     drop(first);
+   |          ----- first borrow later used here

@@ -1,0 +1,11 @@
+error[E0597]: `key` does not live long enough
+  --> compile_fail/ch11_future_outlives_key.rs:30:30
+   |
+28 |     let future = {
+   |         ------ borrow later stored here
+29 |         let key = String::from("port");
+   |             --- binding `key` declared here
+30 |         lookup_async(config, &key)
+   |                              ^^^^ borrowed value does not live long enough
+31 |     };
+   |     - `key` dropped here while still borrowed

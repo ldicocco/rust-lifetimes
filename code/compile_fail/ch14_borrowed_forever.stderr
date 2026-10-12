@@ -1,0 +1,10 @@
+error[E0502]: cannot borrow `set` as immutable because it is also borrowed as mutable
+  --> compile_fail/ch14_borrowed_forever.rs:33:5
+   |
+32 |     set.add_all(&text);
+   |     --- mutable borrow occurs here
+33 |     set.len() // the set is still borrowed by `add_all`
+   |     ^^^
+   |     |
+   |     immutable borrow occurs here
+   |     mutable borrow later used here

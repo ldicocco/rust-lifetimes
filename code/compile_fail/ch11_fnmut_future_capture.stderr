@@ -1,0 +1,16 @@
+error: captured variable cannot escape `FnMut` closure body
+  --> compile_fail/ch11_fnmut_future_capture.rs:20:32
+   |
+19 |       let mut seen = Vec::new();
+   |           -------- variable defined here
+20 |       for_each_line(text, |line| async {
+   |  ______________________________-_^
+   | |                              |
+   | |                              inferred to be a `FnMut` closure
+21 | |         seen.push(line);
+   | |         ---- variable captured here
+22 | |     })
+   | |_____^ returns an `async` block that contains a reference to a captured variable, which then escapes the closure body
+   |
+   = note: `FnMut` closures only have access to their captured variables while they are executing...
+   = note: ...therefore, they cannot allow references to captured variables to escape

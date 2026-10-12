@@ -1,0 +1,18 @@
+error[E0597]: `local` does not live long enough
+  --> compile_fail/ch07_static_bound_borrow.rs:10:21
+   |
+ 9 |     let local = String::from("owned by caller");
+   |         ----- binding `local` declared here
+10 |     requires_static(&local); // `&'a String: 'static` only if `'a` is `'static`
+   |     ----------------^^^^^^-
+   |     |               |
+   |     |               borrowed value does not live long enough
+   |     argument requires that `local` is borrowed for `'static`
+11 | }
+   | - `local` dropped here while still borrowed
+   |
+note: requirement that the value outlives `'static` introduced here
+  --> compile_fail/ch07_static_bound_borrow.rs:5:23
+   |
+ 5 | fn requires_static<T: 'static>(_value: T) {}
+   |                       ^^^^^^^

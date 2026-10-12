@@ -1,0 +1,10 @@
+error[E0382]: borrow of moved value: `words`
+  --> compile_fail/ch05_move_mut_ref.rs:14:14
+   |
+11 | pub fn collect(words: &mut Vec<String>) {
+   |                ----- move occurs because `words` has type `&mut Vec<String>`, which does not implement the `Copy` trait
+12 |     let other = words; // moves the reference out of `words`
+   |                 ----- value moved here
+13 |     add_word(other, "alpha");
+14 |     add_word(words, "beta");
+   |              ^^^^^ value borrowed here after move

@@ -1,0 +1,11 @@
+error[E0597]: `local` does not live long enough
+  --> compile_fail/ch04_static_callback.rs:16:24
+   |
+15 |     let local = String::from("local");
+   |         ----- binding `local` declared here
+16 |     apply(only_static, &local)
+   |           -----------  ^^^^^^ borrowed value does not live long enough
+   |           |
+   |           coercion requires that `local` is borrowed for `'static`
+17 | }
+   | - `local` dropped here while still borrowed

@@ -1,0 +1,24 @@
+error: lifetime may not live long enough
+  --> compile_fail/ch03_rule_first.rs:13:20
+   |
+10 | pub fn lookup<'k, 't>(key: &'k str, table: &'t Table) -> Option<&'k str> {
+   |               --  -- lifetime `'t` defined here
+   |               |
+   |               lifetime `'k` defined here
+...
+13 |             return Some(value.as_str());
+   |                    ^^^^^^^^^^^^^^^^^^^^ function was supposed to return data with lifetime `'k` but it is returning data with lifetime `'t`
+   |
+   = help: consider adding the following bound: `'t: 'k`
+
+error[E0597]: `key` does not live long enough
+  --> compile_fail/ch03_rule_first.rs:25:22
+   |
+24 |         let key = String::from("a"); // a temporary key...
+   |             --- binding `key` declared here
+25 |         hit = lookup(&key, table);
+   |                      ^^^^ borrowed value does not live long enough
+26 |     } // ...dropped here, but the result comes from `table`
+   |     - `key` dropped here while still borrowed
+27 |     println!("{hit:?}");
+   |                --- borrow later used here

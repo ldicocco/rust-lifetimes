@@ -1,0 +1,3 @@
+Notes (draft) (final) (reviewed) (checked): ["draft", "final", "reviewed", "checked"]
+["checked", "final", "reviewed", "draft"]
+["final", "checked", "reviewed", "draft"]

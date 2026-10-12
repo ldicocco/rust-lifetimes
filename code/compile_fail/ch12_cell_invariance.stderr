@@ -1,0 +1,12 @@
+error[E0597]: `local` does not live long enough
+  --> compile_fail/ch12_cell_invariance.rs:14:20
+   |
+13 |     let local = String::from("short-lived");
+   |         ----- binding `local` declared here
+14 |     remember(slot, &local); // would leave a dangling `&str` in `slot`
+   |     ---------------^^^^^^-
+   |     |              |
+   |     |              borrowed value does not live long enough
+   |     argument requires that `local` is borrowed for `'static`
+15 | }
+   | - `local` dropped here while still borrowed
